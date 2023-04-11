@@ -7,7 +7,7 @@ public class User {
     private int id;
     private String loginName;
     private String password;
-    private char gender;
+    private String  gender;
     private int age;
     private String address;
     private boolean qualification;

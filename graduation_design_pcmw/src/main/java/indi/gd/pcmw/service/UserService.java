@@ -9,4 +9,8 @@ public interface UserService {
     int loginValidate(String name,String password);
 
     User getUserByLoginName(String loginName);
+
+    User getModifiedAttr(String loginName);
+
+    int updateUser(User user);
 }

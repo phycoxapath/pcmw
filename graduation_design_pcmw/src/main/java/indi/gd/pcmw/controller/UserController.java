@@ -8,9 +8,15 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
+
+import java.io.File;
+import java.io.IOException;
 
 @RestController
 @RequestMapping("/users")
@@ -36,7 +42,28 @@ public class UserController {
             return "login name or password error";
     }
     @GetMapping("/{loginName}")
-    public User getUserByLoginName(@PathVariable String loginName){
-        return userService.getUserByLoginName(loginName);
+    public User getUserByLoginName(@PathVariable("loginName") String loginName){
+            return userService.getUserByLoginName(loginName);
+
+    }
+    @PutMapping
+    public String updateUser(@RequestBody User user){
+        if (userService.updateUser(user) == 1)
+            return "update success";
+        else
+            return "update fail";
+    }
+    @GetMapping("/getModifiedAttr")
+    public User getModifiedAttr(@RequestParam String loginName){
+        return userService.getModifiedAttr(loginName);
+    }
+    @PostMapping("/upload")
+    public String uploadReceive(MultipartFile file){
+        try {
+            file.transferTo(new File("D://upload.txt"));
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+        return "upload success";
     }
 }

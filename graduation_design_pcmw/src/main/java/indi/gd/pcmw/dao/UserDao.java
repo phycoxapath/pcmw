@@ -1,5 +1,6 @@
 package indi.gd.pcmw.dao;
 
+import indi.gd.pcmw.dao.provider.DynamicUpdate;
 import indi.gd.pcmw.domain.User;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
@@ -7,6 +8,7 @@ import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Result;
 import org.apache.ibatis.annotations.Results;
 import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.UpdateProvider;
 
 @Mapper
 public interface UserDao {
@@ -22,4 +24,14 @@ public interface UserDao {
 
     @Select("select * from pcmw_user where login_name = #{loginName}")
     User getUserByLoginName(String loginName);
+
+    @Select("select login_name,gender,age,address from pcmw_user where login_name = #{loginName}")
+    User getModifiedAttr(String loginName);
+
+    /**
+     *
+     * UpdateProvider实现动态sql更新User
+     */
+    @UpdateProvider(type = DynamicUpdate.class, method = "updateUser")
+    int updateUser(User user);
 }
