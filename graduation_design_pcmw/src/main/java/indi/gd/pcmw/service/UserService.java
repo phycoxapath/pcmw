@@ -13,4 +13,6 @@ public interface UserService {
     User getModifiedAttr(String loginName);
 
     int updateUser(User user);
+
+    int updateUserQual(String imageName, String loginName);
 }

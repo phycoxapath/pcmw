@@ -26,7 +26,8 @@ public class DynamicUpdate {
             if (user.getAddress() != null && !user.getAddress().equals("")){
                 SET("address = #{address}");
             }
-            WHERE("login_name = #{loginName}");
+
+            WHERE("id = #{id}");
 
         }}.toString();
     }

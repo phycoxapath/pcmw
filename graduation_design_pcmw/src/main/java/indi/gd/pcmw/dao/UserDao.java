@@ -8,6 +8,7 @@ import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Result;
 import org.apache.ibatis.annotations.Results;
 import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.Update;
 import org.apache.ibatis.annotations.UpdateProvider;
 
 @Mapper
@@ -34,4 +35,7 @@ public interface UserDao {
      */
     @UpdateProvider(type = DynamicUpdate.class, method = "updateUser")
     int updateUser(User user);
+
+    @Update("update pcmw_user set qual_image = #{imageName} where login_name = #{loginName}")
+    int updateUserQual(@Param("imageName") String imageName, @Param("loginName") String loginName);
 }

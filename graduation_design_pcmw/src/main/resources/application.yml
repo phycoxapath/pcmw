@@ -8,6 +8,10 @@ spring:
     username: root
     password: 123456
     type: com.alibaba.druid.pool.DruidDataSource
+  servlet:
+    multipart:
+      max-file-size: 2MB
 mybatis:
   configuration:
     map-underscore-to-camel-case: true
+UserQualPath: "D://UserQual//"

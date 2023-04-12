@@ -13,7 +13,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public int loginValidate(String name, String password) {
-       return userDao.loginValidate(name,password);
+        return userDao.loginValidate(name,password);
     }
     @Override
     public int save(User user) {
@@ -33,5 +33,10 @@ public class UserServiceImpl implements UserService {
     @Override
     public int updateUser(User user) {
         return userDao.updateUser(user);
+    }
+
+    @Override
+    public int updateUserQual(String imageName, String loginName) {
+        return userDao.updateUserQual(imageName, loginName);
     }
 }
