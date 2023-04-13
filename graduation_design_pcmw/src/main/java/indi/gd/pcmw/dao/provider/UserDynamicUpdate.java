@@ -7,7 +7,7 @@ import org.apache.ibatis.jdbc.SQL;
 /*
 *
  */
-public class DynamicUpdate {
+public class UserDynamicUpdate {
     public String updateUser(final User user){
         return new SQL(){{
             UPDATE("pcmw_user");
@@ -26,8 +26,8 @@ public class DynamicUpdate {
             if (user.getAddress() != null && !user.getAddress().equals("")){
                 SET("address = #{address}");
             }
-
-            WHERE("id = #{id}");
+            //忘记密码重置密码时处于未登录状态，获取不到id
+            WHERE("login_name = #{loginName} or id = #{id}");
 
         }}.toString();
     }

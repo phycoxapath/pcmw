@@ -2,6 +2,8 @@ package indi.gd.pcmw.domain;
 
 import lombok.Data;
 
+import java.util.List;
+
 @Data
 public class Hospital {
     private int id;
@@ -9,4 +11,5 @@ public class Hospital {
     private String password;
     private boolean qualification;
     private String qualType;
+    private List<Department> departments;
 }

@@ -1,5 +1,6 @@
 package indi.gd.pcmw.controller;
 
+import indi.gd.pcmw.domain.Department;
 import indi.gd.pcmw.domain.Hospital;
 import indi.gd.pcmw.domain.User;
 import indi.gd.pcmw.service.HospitalService;
@@ -9,9 +10,13 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/hospitals")
@@ -26,7 +31,7 @@ public class HospitalController {
     }
 
     @GetMapping("/{hospitalName}")
-    public User getUserByLoginName(@PathVariable("hospitalName") String hospitalName){
+    public Hospital getHospitalByHospitalName(@PathVariable("hospitalName") String hospitalName){
         return hospitalService.getHospitalHospitalName(hospitalName);
     }
     @GetMapping("/{hospitalName}/{password}")
@@ -38,6 +43,29 @@ public class HospitalController {
         }
         else
             return "login name or password error";
+    }
+    @PutMapping
+    public String updateHospital(@RequestBody Hospital hospital){
+       if (hospitalService.updateHospital(hospital) == 1)
+           return "update success";
+       else
+           return "update fail";
+    }
+
+    @PostMapping("/bindDept")
+    public String insertDeptBatch(@RequestBody List<Department> departments){
+        if (hospitalService.insertDeptBatch(departments) > 0){
+            return "insert success";
+        }
+        else
+            return "insert fail";
+    }
+
+    @GetMapping("/getById/{id}")
+    public Hospital getHospitalById(@PathVariable Integer id){
+        Hospital hospital = hospitalService.getHospitalById(id);
+        hospital.setDepartments(hospitalService.getDeptByHospId(id));
+        return hospital;
     }
 
 }
