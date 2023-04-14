@@ -6,6 +6,7 @@ import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.SelectProvider;
 import org.apache.ibatis.annotations.Update;
 import org.apache.ibatis.annotations.UpdateProvider;
 
@@ -20,10 +21,12 @@ public interface UserDao {
 
     @Select("select count(*) from pcmw_user where login_name = #{loginName} and password = #{password}")
     int loginValidate(@Param("loginName") String loginName,@Param("password") String password);
-
+    @Select("select * from pcmw_user where id = #{id}")
+    User getUserById(Integer id);
     @Select("select * from pcmw_user where login_name = #{loginName}")
     User getUserByLoginName(String loginName);
-
+//    @SelectProvider
+//    User getUserByAnyProp(String prop);
     @Select("select login_name,gender,age,address from pcmw_user where login_name = #{loginName}")
     User getModifiedAttr(String loginName);
 
@@ -34,6 +37,6 @@ public interface UserDao {
     @UpdateProvider(type = UserDynamicUpdate.class, method = "updateUser")
     int updateUser(User user);
 
-    @Update("update pcmw_user set qual_image = #{imageName} where login_name = #{loginName}")
-    int updateUserQual(@Param("imageName") String imageName, @Param("loginName") String loginName);
+    @Update("update pcmw_user set qual_image = #{imageName} where id = #{id}")
+    int updateUserQual(@Param("imageName") String imageName, @Param("id") Integer id);
 }

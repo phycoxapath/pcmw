@@ -34,8 +34,8 @@ public class UserController {
         return "register success";
     }
 
-    @GetMapping("/{loginName}/{password}")
-    public String login(@PathVariable("loginName") String loginName, @PathVariable("password") String password){
+    @GetMapping("/login")
+    public String login(@RequestParam("name") String loginName, @RequestParam("password") String password){
 
         int flag = userService.loginValidate(loginName,password);
         if (flag == 1) {
@@ -44,10 +44,14 @@ public class UserController {
         else
             return "login name or password error";
     }
-    @GetMapping("/{loginName}")
-    public User getUserByLoginName(@PathVariable("loginName") String loginName){
+    @GetMapping("/getByName")
+    public User getUserByLoginName(@RequestParam("name") String loginName){
             return userService.getUserByLoginName(loginName);
 
+    }
+    @GetMapping("/getById")
+    public User getUserById(@RequestParam("id") Integer id){
+        return userService.getUserById(id);
     }
     @PutMapping
     public String updateUser(@RequestBody User user){
@@ -61,7 +65,7 @@ public class UserController {
         return userService.getModifiedAttr(loginName);
     }
     @PostMapping("/upload")
-    public String uploadReceive(MultipartFile file ,@RequestParam("loginName") String loginName){
+    public String uploadReceive(MultipartFile file ,@RequestParam("id") Integer id){
         String fileName = UUID.randomUUID().toString() + file.getOriginalFilename();
         File dir = new File(path);
         String imageName = path + fileName;
@@ -70,7 +74,7 @@ public class UserController {
 
         try {
             file.transferTo(new File(imageName));
-            userService.updateUserQual(imageName,loginName);
+            userService.updateUserQual(imageName,id);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }

@@ -1,17 +1,18 @@
-package indi.gd.pcmw.domain;
+package indi.gd.pcmw.dto;
 
 import lombok.Data;
-import org.springframework.jdbc.core.SqlReturnType;
 
 @Data
-public class Doctor {
+public class DoctorDTO {
     private int id;
     private int jobId;
     private String password;
     private String docName;
-    private String gender;
+    private char gender;
     private byte workingDay;
-    private int deptId;
+    private String deptName;
     private boolean qualification;
     private String qualType;
+    private int deptId;
+    private String hospId;
 }

@@ -26,6 +26,11 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public User getUserById(Integer id) {
+        return userDao.getUserById(id);
+    }
+
+    @Override
     public User getModifiedAttr(String loginName) {
         return userDao.getModifiedAttr(loginName);
     }
@@ -36,7 +41,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public int updateUserQual(String imageName, String loginName) {
-        return userDao.updateUserQual(imageName, loginName);
+    public int updateUserQual(String imageName, Integer id) {
+        return userDao.updateUserQual(imageName, id);
     }
 }

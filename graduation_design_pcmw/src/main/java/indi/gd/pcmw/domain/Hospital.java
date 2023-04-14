@@ -11,5 +11,6 @@ public class Hospital {
     private String password;
     private boolean qualification;
     private String qualType;
+    private String qualImage;
     private List<Department> departments;
 }

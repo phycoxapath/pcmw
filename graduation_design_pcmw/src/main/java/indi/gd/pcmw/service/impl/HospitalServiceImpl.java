@@ -16,6 +16,26 @@ public class HospitalServiceImpl implements HospitalService {
     HospitalDao hospitalDao;
 
     @Override
+    public List<Hospital> getAllHospitals() {
+        List<Hospital> hospitals =  hospitalDao.getAllHospitals();
+        for (Hospital hosp:hospitals
+             ) {
+            hosp.setDepartments(hospitalDao.getDeptByHospId(hosp.getId()));
+        }
+        return hospitals;
+    }
+
+    @Override
+    public int deleteDept(String deptName, String hospId) {
+        return hospitalDao.deleteDept(deptName, hospId);
+    }
+
+    @Override
+    public int updateHospitalQual(String imageName, Integer id) {
+        return hospitalDao.updateHospitalQual(imageName, id);
+    }
+
+    @Override
     public Hospital getHospitalById(Integer id) {
         return hospitalDao.getHospitalById(id);
     }

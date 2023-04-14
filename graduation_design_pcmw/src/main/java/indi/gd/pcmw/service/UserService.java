@@ -10,9 +10,11 @@ public interface UserService {
 
     User getUserByLoginName(String loginName);
 
+    User getUserById(Integer id);
+
     User getModifiedAttr(String loginName);
 
     int updateUser(User user);
 
-    int updateUserQual(String imageName, String loginName);
+    int updateUserQual(String imageName, Integer id);
 }
