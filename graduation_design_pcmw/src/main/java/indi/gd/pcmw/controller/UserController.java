@@ -1,5 +1,6 @@
 package indi.gd.pcmw.controller;
 
+import indi.gd.pcmw.domain.Apply;
 import indi.gd.pcmw.domain.User;
 import indi.gd.pcmw.service.UserService;
 import org.apache.commons.codec.digest.DigestUtils;
@@ -79,5 +80,12 @@ public class UserController {
             throw new RuntimeException(e);
         }
         return "upload success";
+    }
+    @PostMapping("/insertApply")
+    public String insertApply(@RequestBody Apply apply){
+        if (userService.insertApplication(apply) == 1){
+            return "insert apply success";
+        }else
+            return "insert fail";
     }
 }

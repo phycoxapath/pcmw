@@ -1,6 +1,7 @@
 package indi.gd.pcmw.dao;
 
 import indi.gd.pcmw.dao.provider.UserDynamicUpdate;
+import indi.gd.pcmw.domain.Apply;
 import indi.gd.pcmw.domain.User;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
@@ -16,7 +17,7 @@ public interface UserDao {
     /**
      * 保存用户
      */
-    @Insert("insert into pcmw_user values(#{id},#{loginName},#{password},#{gender},#{age},#{address},#{qualification},#{qualType})")
+    @Insert("insert into pcmw_user values(#{id},#{loginName},#{password},#{gender},#{age},#{address},#{qualification},#{qualType},#{qualImage})")
     int save(User user);
 
     @Select("select count(*) from pcmw_user where login_name = #{loginName} and password = #{password}")
@@ -39,4 +40,6 @@ public interface UserDao {
 
     @Update("update pcmw_user set qual_image = #{imageName} where id = #{id}")
     int updateUserQual(@Param("imageName") String imageName, @Param("id") Integer id);
+    @Insert("insert into pcmw_apply(id,application_type,user_id,doc_id,hosp_id) values(#{id},#{applicationType},#{userId},#{docId},#{hospId})")
+    int insertApplication(Apply apply);
 }

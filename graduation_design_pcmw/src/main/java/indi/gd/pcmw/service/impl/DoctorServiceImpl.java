@@ -19,6 +19,11 @@ public class DoctorServiceImpl implements DoctorService {
     }
 
     @Override
+    public int updateDoctorQual(String imageName, Integer id) {
+        return doctorDao.updateDoctorQual(imageName, id);
+    }
+
+    @Override
     public DoctorDTO getDoctorWithDeptById(Integer id) {
         DoctorDTO doctorDTO = doctorDao.getDoctorWithDeptById(id);
         if (doctorDTO.getDeptId() != 0) {

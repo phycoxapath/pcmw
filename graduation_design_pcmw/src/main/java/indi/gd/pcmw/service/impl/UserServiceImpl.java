@@ -1,6 +1,7 @@
 package indi.gd.pcmw.service.impl;
 
 import indi.gd.pcmw.dao.UserDao;
+import indi.gd.pcmw.domain.Apply;
 import indi.gd.pcmw.domain.User;
 import indi.gd.pcmw.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,6 +11,11 @@ import org.springframework.stereotype.Service;
 public class UserServiceImpl implements UserService {
     @Autowired
     private UserDao userDao;
+
+    @Override
+    public int insertApplication(Apply apply) {
+        return userDao.insertApplication(apply);
+    }
 
     @Override
     public int loginValidate(String name, String password) {

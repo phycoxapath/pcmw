@@ -1,5 +1,6 @@
 package indi.gd.pcmw.controller;
 
+import indi.gd.pcmw.domain.Apply;
 import indi.gd.pcmw.domain.Department;
 import indi.gd.pcmw.domain.Hospital;
 import indi.gd.pcmw.domain.User;
@@ -88,20 +89,29 @@ public class HospitalController {
         String fileName = UUID.randomUUID().toString() + file.getOriginalFilename();
         File dir = new File(path);
         String imageName = path + fileName;
+        int flag;
         if (!dir.exists())
             dir.mkdirs();
 
         try {
             file.transferTo(new File(imageName));
-            hospitalService.updateHospitalQual(imageName,id);
+            flag = hospitalService.updateHospitalQual(imageName,id);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-        return "upload success";
+        if (flag > 0)
+            return "upload success";
+        else
+            return "upload fail";
     }
 
     @GetMapping("/getAllHospital")
     public List<Hospital> getAll(){
         return hospitalService.getAllHospitals();
+    }
+
+    @GetMapping("/getApplications")
+    public List<Apply> getApplications(){
+        return hospitalService.getApplications();
     }
 }

@@ -2,6 +2,7 @@ package indi.gd.pcmw.dao;
 
 import indi.gd.pcmw.dao.provider.DeptBatchInsert;
 import indi.gd.pcmw.dao.provider.HospitalDynamicUpdate;
+import indi.gd.pcmw.domain.Apply;
 import indi.gd.pcmw.domain.Department;
 import indi.gd.pcmw.domain.Hospital;
 import indi.gd.pcmw.domain.User;
@@ -25,7 +26,7 @@ public interface HospitalDao {
      * @return
      * 注册时保存医院
      */
-    @Insert("insert into pcmw_hospital values(#{id},#{hospitalName},#{password},#{qualification},#{qualType})")
+    @Insert("insert into pcmw_hospital values(#{id},#{hospitalName},#{password},#{qualification},#{qualType},#{qualImage})")
     int save(Hospital hospital);
 
     /**
@@ -74,4 +75,7 @@ public interface HospitalDao {
     int updateHospitalQual(@Param("imageName") String imageName,@Param("id") Integer id);
     @Select("select * from pcmw_hospital")
     List<Hospital> getAllHospitals();
+
+    @Select("select * from pcmw_apply")
+    List<Apply> getApplications();
 }

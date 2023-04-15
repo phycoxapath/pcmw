@@ -1,5 +1,6 @@
 package indi.gd.pcmw.dto;
 
+import indi.gd.pcmw.domain.Doctor;
 import lombok.Data;
 
 @Data
@@ -13,6 +14,7 @@ public class DoctorDTO {
     private String deptName;
     private boolean qualification;
     private String qualType;
+    private String qualImage;
     private int deptId;
     private String hospId;
 }

@@ -1,6 +1,7 @@
 package indi.gd.pcmw.service.impl;
 
 import indi.gd.pcmw.dao.HospitalDao;
+import indi.gd.pcmw.domain.Apply;
 import indi.gd.pcmw.domain.Department;
 import indi.gd.pcmw.domain.Hospital;
 import indi.gd.pcmw.domain.User;
@@ -14,6 +15,11 @@ import java.util.List;
 public class HospitalServiceImpl implements HospitalService {
     @Autowired
     HospitalDao hospitalDao;
+
+    @Override
+    public List<Apply> getApplications() {
+        return hospitalDao.getApplications();
+    }
 
     @Override
     public List<Hospital> getAllHospitals() {

@@ -10,11 +10,12 @@ import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.Update;
 import org.apache.ibatis.annotations.UpdateProvider;
 
 @Mapper
 public interface DoctorDao {
-    @Insert("insert into pcmw_doctor values(#{id},#{jobId},#{password},#{docName},#{gender},#{workingDay},#{deptId},#{qualification},#{qualType})")
+    @Insert("insert into pcmw_doctor values(#{id},#{jobId},#{password},#{docName},#{gender},#{workingDay},#{deptId},#{qualification},#{qualType},#{qualImage})")
     int save(Doctor doctor);
 
     @Select("select count(*) from pcmw_doctor where job_id = #{jobId} and password = #{password}")
@@ -27,7 +28,8 @@ public interface DoctorDao {
     Department getDeptById(Integer id);
     @Select("select * from pcmw_doctor where id = #{id}")
     DoctorDTO getDoctorWithDeptById(Integer id);
-
     @UpdateProvider(type = DoctorDynamicUpdate.class,method = "updateDoctor")
     int updateDoctor(Doctor doctor);
+    @Update("update pcmw_doctor set qual_image = #{imageName} where id = #{id}")
+    int updateDoctorQual(@Param("imageName") String imageName,@Param("id") Integer id);
 }

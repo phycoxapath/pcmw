@@ -14,4 +14,5 @@ public class Doctor {
     private int deptId;
     private boolean qualification;
     private String qualType;
+    private String qualImage;
 }

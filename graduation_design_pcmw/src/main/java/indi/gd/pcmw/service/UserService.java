@@ -1,5 +1,6 @@
 package indi.gd.pcmw.service;
 
+import indi.gd.pcmw.domain.Apply;
 import indi.gd.pcmw.domain.User;
 
 public interface UserService {
@@ -17,4 +18,6 @@ public interface UserService {
     int updateUser(User user);
 
     int updateUserQual(String imageName, Integer id);
+
+    int insertApplication(Apply apply);
 }
