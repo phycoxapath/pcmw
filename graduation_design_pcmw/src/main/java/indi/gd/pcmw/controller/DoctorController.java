@@ -72,7 +72,8 @@ public class DoctorController {
         String fileName = UUID.randomUUID().toString() + file.getOriginalFilename();
         File dir = new File(path);
         String imageName = path + fileName;
-        int flag;
+
+        int flag = 0;
         if (!dir.exists())
             dir.mkdirs();
 
@@ -83,7 +84,7 @@ public class DoctorController {
             throw new RuntimeException(e);
         }
         if (flag > 0)
-            return "upload success";
+            return imageName;
         else
             return "upload fail";
     }

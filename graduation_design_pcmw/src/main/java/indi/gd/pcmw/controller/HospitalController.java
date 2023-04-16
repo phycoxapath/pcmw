@@ -100,7 +100,7 @@ public class HospitalController {
             throw new RuntimeException(e);
         }
         if (flag > 0)
-            return "upload success";
+            return imageName;
         else
             return "upload fail";
     }

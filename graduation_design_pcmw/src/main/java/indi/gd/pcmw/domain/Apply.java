@@ -1,5 +1,6 @@
 package indi.gd.pcmw.domain;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
 
 import java.util.Date;
@@ -7,9 +8,13 @@ import java.util.Date;
 @Data
 public class Apply {
     private int id;
-    private String applicationType;
-    private int userId;
-    private int docId;
-    private int hospId;
+    private String applyType;
+    private int initiatorId;
+    private int handlerId;
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private Date applyTime;
+    private String applyState;
+    private String applyImage;
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    private Date handleTime;
 }

@@ -40,6 +40,6 @@ public interface UserDao {
 
     @Update("update pcmw_user set qual_image = #{imageName} where id = #{id}")
     int updateUserQual(@Param("imageName") String imageName, @Param("id") Integer id);
-    @Insert("insert into pcmw_apply(id,application_type,user_id,doc_id,hosp_id) values(#{id},#{applicationType},#{userId},#{docId},#{hospId})")
+    @Insert("insert into pcmw_apply(id,apply_type,initiator_id,handler_id,apply_state,apply_image) values(#{id},#{applyType},#{initiatorId},#{handlerId},#{applyState},#{applyImage})")
     int insertApplication(Apply apply);
 }

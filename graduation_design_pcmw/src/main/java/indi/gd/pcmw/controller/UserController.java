@@ -70,16 +70,20 @@ public class UserController {
         String fileName = UUID.randomUUID().toString() + file.getOriginalFilename();
         File dir = new File(path);
         String imageName = path + fileName;
+        int flag = 0;
         if (!dir.exists())
             dir.mkdirs();
 
         try {
             file.transferTo(new File(imageName));
-            userService.updateUserQual(imageName,id);
+            flag = userService.updateUserQual(imageName,id);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-        return "upload success";
+        if (flag > 0)
+            return imageName;
+        else
+            return "upload fail";
     }
     @PostMapping("/insertApply")
     public String insertApply(@RequestBody Apply apply){
