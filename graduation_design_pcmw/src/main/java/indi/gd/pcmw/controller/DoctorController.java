@@ -19,6 +19,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.List;
 import java.util.UUID;
 
 @RestController
@@ -58,6 +59,10 @@ public class DoctorController {
     @GetMapping("/getEnhanceDoctor")
     public DoctorDTO getDoctorWithDeptById(@RequestParam("id") Integer id){
         return doctorService.getDoctorWithDeptById(id);
+    }
+    @GetMapping("/getByDeptId")
+    public List<Doctor> getDoctorsByDeptId(@RequestParam("deptId") Integer deptId){
+        return doctorService.getDoctorsByDeptId(deptId);
     }
     @PutMapping
     public String updateDoctor(@RequestBody Doctor doctor){

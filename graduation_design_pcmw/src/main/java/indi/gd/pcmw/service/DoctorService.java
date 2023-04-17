@@ -4,6 +4,8 @@ import indi.gd.pcmw.domain.Doctor;
 import indi.gd.pcmw.dto.DoctorDTO;
 import org.apache.ibatis.annotations.Param;
 
+import java.util.List;
+
 public interface DoctorService {
     int save(Doctor doctor);
     int loginValidate(String jobId, String password);
@@ -12,4 +14,6 @@ public interface DoctorService {
     DoctorDTO getDoctorWithDeptById(Integer id);
     int updateDoctor(Doctor doctor);
     int updateDoctorQual(String imageName, Integer id);
+    List<Doctor> getDoctorsByDeptId(Integer deptId);
+
 }

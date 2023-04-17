@@ -13,6 +13,8 @@ import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
 import org.apache.ibatis.annotations.UpdateProvider;
 
+import java.util.List;
+
 @Mapper
 public interface DoctorDao {
     @Insert("insert into pcmw_doctor values(#{id},#{jobId},#{password},#{docName},#{gender},#{workingDay},#{deptId},#{qualification},#{qualType},#{qualImage})")
@@ -32,4 +34,6 @@ public interface DoctorDao {
     int updateDoctor(Doctor doctor);
     @Update("update pcmw_doctor set qual_image = #{imageName} where id = #{id}")
     int updateDoctorQual(@Param("imageName") String imageName,@Param("id") Integer id);
+    @Select("select * from pcmw_doctor where dept_id = #{deptId}")
+    List<Doctor> getDoctorsByDeptId(Integer deptId);
 }

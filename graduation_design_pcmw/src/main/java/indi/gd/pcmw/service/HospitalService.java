@@ -29,4 +29,7 @@ public interface HospitalService {
     List<Hospital> getAllHospitals();
 
     List<Apply> getApplications();
+
+    int updateDoctorQualification(Integer id);
+
 }

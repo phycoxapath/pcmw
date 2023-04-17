@@ -8,10 +8,17 @@ import indi.gd.pcmw.service.DoctorService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class DoctorServiceImpl implements DoctorService {
     @Autowired
     DoctorDao doctorDao;
+
+    @Override
+    public List<Doctor> getDoctorsByDeptId(Integer deptId) {
+        return doctorDao.getDoctorsByDeptId(deptId);
+    }
 
     @Override
     public int updateDoctor(Doctor doctor) {

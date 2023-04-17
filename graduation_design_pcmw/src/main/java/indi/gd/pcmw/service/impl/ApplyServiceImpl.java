@@ -40,7 +40,7 @@ public class ApplyServiceImpl implements ApplyService {
             for (ApplyDTO application: applyList
                  ) {
                 application.setInitiatorName(doctorDao.getDoctorById(initiatorId).getJobId()+"");
-                application.setHandlerName(hospitalDao.getHospitalById(initiatorId).getHospitalName());
+                application.setHandlerName(hospitalDao.getHospitalById(application.getHandlerId()).getHospitalName());
             }
         }else {
             for (ApplyDTO application: applyList

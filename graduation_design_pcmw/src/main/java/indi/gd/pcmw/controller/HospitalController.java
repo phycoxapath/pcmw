@@ -114,4 +114,14 @@ public class HospitalController {
     public List<Apply> getApplications(){
         return hospitalService.getApplications();
     }
+
+    @PutMapping("/updateDocQual")
+    public String updateDoctorQualification(@RequestParam("docId") Integer docId){
+        int flag = hospitalService.updateDoctorQualification(docId);
+        if (flag > 0)
+            return "update success";
+        else
+            return "update fail";
+
+    }
 }
