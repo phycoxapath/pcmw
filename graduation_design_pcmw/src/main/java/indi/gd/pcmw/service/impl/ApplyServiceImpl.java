@@ -10,6 +10,7 @@ import indi.gd.pcmw.service.ApplyService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Iterator;
 import java.util.List;
 
 @Service
@@ -30,24 +31,42 @@ public class ApplyServiceImpl implements ApplyService {
     @Override
     public List<ApplyDTO> getApplicationByInitiatorId(Integer initiatorId, String role) {
         List<ApplyDTO> applyList = applyDao.getApplicationByInitiatorId(initiatorId);
+        Iterator<ApplyDTO> iterator = applyList.listIterator();
         if (role.equals("users")){
-            for (ApplyDTO application: applyList
-                 ) {
-                application.setInitiatorName(userDao.getUserById(initiatorId).getLoginName());
+            while (iterator.hasNext()){
+                ApplyDTO applyDTO = iterator.next();
+                if (!applyDTO.getApplyType().equals("免挂号绿色通道预约资质申请")){
+                    iterator.remove();
+                    continue;
+                }
+                applyDTO.setInitiatorName(userDao.getUserById(initiatorId).getLoginName());
                 //admin handle
+
             }
+
         } else if (role.equals("doctors")) {
-            for (ApplyDTO application: applyList
-                 ) {
-                application.setInitiatorName(doctorDao.getDoctorById(initiatorId).getJobId()+"");
-                application.setHandlerName(hospitalDao.getHospitalById(application.getHandlerId()).getHospitalName());
+            while (iterator.hasNext()){
+                ApplyDTO applyDTO = iterator.next();
+                if (!applyDTO.getApplyType().equals("从业资格认证申请")){
+                    iterator.remove();
+                    continue;
+                }
+                applyDTO.setInitiatorName(doctorDao.getDoctorById(initiatorId).getJobId()+"");
+                applyDTO.setHandlerName(hospitalDao.getHospitalById(applyDTO.getHandlerId()).getHospitalName());
             }
+
         }else {
-            for (ApplyDTO application: applyList
-            ) {
-                application.setInitiatorName(hospitalDao.getHospitalById(initiatorId).getHospitalName());
+            while (iterator.hasNext()){
+                ApplyDTO applyDTO = iterator.next();
+                if (!applyDTO.getApplyType().equals("机构资质认证申请")){
+                    iterator.remove();
+                    continue;
+                }
+                applyDTO.setInitiatorName(hospitalDao.getHospitalById(initiatorId).getHospitalName());
                 //admin handle
+
             }
+
         }
         return applyList;
     }

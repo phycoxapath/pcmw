@@ -30,6 +30,6 @@ public interface HospitalService {
 
     List<Apply> getApplications();
 
-    int updateDoctorQualification(Integer id);
+    int updateDoctorQualification(Integer id, boolean qualification);
 
 }

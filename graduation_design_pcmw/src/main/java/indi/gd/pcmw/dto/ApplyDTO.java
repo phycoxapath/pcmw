@@ -7,6 +7,7 @@ public class ApplyDTO extends Apply {
     private String handlerName;
 
 
+
     public String getInitiatorName() {
         return initiatorName;
     }

@@ -116,8 +116,8 @@ public class HospitalController {
     }
 
     @PutMapping("/updateDocQual")
-    public String updateDoctorQualification(@RequestParam("docId") Integer docId){
-        int flag = hospitalService.updateDoctorQualification(docId);
+    public String updateDoctorQualification(@RequestParam("docId") Integer docId, @RequestParam("qualification") boolean qualification){
+        int flag = hospitalService.updateDoctorQualification(docId, qualification);
         if (flag > 0)
             return "update success";
         else

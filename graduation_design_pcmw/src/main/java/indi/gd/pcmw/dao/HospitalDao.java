@@ -78,6 +78,6 @@ public interface HospitalDao {
 
     @Select("select * from pcmw_apply")
     List<Apply> getApplications();
-    @Update("update pcmw_doctor set qualification = true where id = #{id}")
-    int updateDoctorQualification(Integer id);
+    @Update("update pcmw_doctor set qualification = #{qualification} where id = #{id}")
+    int updateDoctorQualification(@Param("id") Integer id ,@Param("qualification") boolean qualification);
 }

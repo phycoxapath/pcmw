@@ -17,8 +17,8 @@ public class HospitalServiceImpl implements HospitalService {
     HospitalDao hospitalDao;
 
     @Override
-    public int updateDoctorQualification(Integer id) {
-        return hospitalDao.updateDoctorQualification(id);
+    public int updateDoctorQualification(Integer id, boolean qualification) {
+        return hospitalDao.updateDoctorQualification(id, qualification);
     }
 
     @Override
