@@ -14,6 +14,6 @@ public interface DoctorService {
     DoctorDTO getDoctorWithDeptById(Integer id);
     int updateDoctor(Doctor doctor);
     int updateDoctorQual(String imageName, Integer id);
-    List<Doctor> getDoctorsByDeptId(Integer deptId);
+    List<DoctorDTO> getDoctorsByDeptId(Integer deptId);
 
 }

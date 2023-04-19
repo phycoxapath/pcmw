@@ -17,7 +17,7 @@ public interface UserDao {
     /**
      * 保存用户
      */
-    @Insert("insert into pcmw_user values(#{id},#{loginName},#{password},#{gender},#{age},#{address},#{qualification},#{qualType},#{qualImage})")
+    @Insert("insert into pcmw_user values(#{id},#{loginName},#{password},#{userName},#{gender},#{age},#{address},#{qualification},#{qualType},#{qualImage})")
     int save(User user);
 
     @Select("select count(*) from pcmw_user where login_name = #{loginName} and password = #{password}")

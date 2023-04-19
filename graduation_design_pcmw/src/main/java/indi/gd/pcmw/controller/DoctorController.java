@@ -61,7 +61,7 @@ public class DoctorController {
         return doctorService.getDoctorWithDeptById(id);
     }
     @GetMapping("/getByDeptId")
-    public List<Doctor> getDoctorsByDeptId(@RequestParam("deptId") Integer deptId){
+    public List<DoctorDTO> getDoctorsByDeptId(@RequestParam("deptId") Integer deptId){
         return doctorService.getDoctorsByDeptId(deptId);
     }
     @PutMapping

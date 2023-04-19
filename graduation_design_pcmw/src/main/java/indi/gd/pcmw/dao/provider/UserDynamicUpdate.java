@@ -26,6 +26,9 @@ public class UserDynamicUpdate {
             if (user.getAddress() != null && !user.getAddress().equals("")){
                 SET("address = #{address}");
             }
+            if (user.getUserName() != null && !user.getUserName().equals("")){
+                SET("user_name = #{userName}");
+            }
             //忘记密码重置密码时处于未登录状态，获取不到id
             WHERE("login_name = #{loginName} or id = #{id}");
 

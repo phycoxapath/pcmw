@@ -124,4 +124,5 @@ public class HospitalController {
             return "update fail";
 
     }
+
 }

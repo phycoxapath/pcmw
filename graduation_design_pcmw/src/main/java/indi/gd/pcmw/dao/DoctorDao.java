@@ -17,7 +17,7 @@ import java.util.List;
 
 @Mapper
 public interface DoctorDao {
-    @Insert("insert into pcmw_doctor values(#{id},#{jobId},#{password},#{docName},#{gender},#{workingDay},#{deptId},#{qualification},#{qualType},#{qualImage})")
+    @Insert("insert into pcmw_doctor values(#{id},#{jobId},#{password},#{docName},#{gender},#{workingDay},#{deptId},#{docProfile},#{qualification},#{qualType},#{qualImage})")
     int save(Doctor doctor);
 
     @Select("select count(*) from pcmw_doctor where job_id = #{jobId} and password = #{password}")
@@ -35,5 +35,5 @@ public interface DoctorDao {
     @Update("update pcmw_doctor set qual_image = #{imageName} where id = #{id}")
     int updateDoctorQual(@Param("imageName") String imageName,@Param("id") Integer id);
     @Select("select * from pcmw_doctor where dept_id = #{deptId}")
-    List<Doctor> getDoctorsByDeptId(Integer deptId);
+    List<DoctorDTO> getDoctorsByDeptId(Integer deptId);
 }

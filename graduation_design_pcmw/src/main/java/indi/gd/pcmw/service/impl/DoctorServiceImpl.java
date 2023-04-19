@@ -16,8 +16,15 @@ public class DoctorServiceImpl implements DoctorService {
     DoctorDao doctorDao;
 
     @Override
-    public List<Doctor> getDoctorsByDeptId(Integer deptId) {
-        return doctorDao.getDoctorsByDeptId(deptId);
+    public List<DoctorDTO> getDoctorsByDeptId(Integer deptId) {
+        List<DoctorDTO> doctors = doctorDao.getDoctorsByDeptId(deptId);
+        for (DoctorDTO doctor:doctors
+             ) {
+            Department dept = doctorDao.getDeptById(deptId);
+            doctor.setHospId(dept.getHospId()+"");
+            doctor.setDeptName(dept.getDeptName());
+        }
+        return doctors;
     }
 
     @Override

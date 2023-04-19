@@ -12,6 +12,7 @@ public class DoctorDTO {
     private char gender;
     private byte workingDay;
     private String deptName;
+    private String docProfile;
     private boolean qualification;
     private String qualType;
     private String qualImage;

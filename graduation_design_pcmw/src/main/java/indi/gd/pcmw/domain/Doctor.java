@@ -12,6 +12,7 @@ public class Doctor {
     private String gender;
     private byte workingDay;
     private int deptId;
+    private String docProfile;
     private boolean qualification;
     private String qualType;
     private String qualImage;

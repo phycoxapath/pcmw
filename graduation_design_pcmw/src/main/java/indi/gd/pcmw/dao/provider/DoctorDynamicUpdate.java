@@ -1,7 +1,6 @@
 package indi.gd.pcmw.dao.provider;
 
 import indi.gd.pcmw.domain.Doctor;
-import indi.gd.pcmw.domain.Hospital;
 import org.apache.ibatis.jdbc.SQL;
 
 public class DoctorDynamicUpdate {
@@ -22,6 +21,9 @@ public class DoctorDynamicUpdate {
             }
             if (doctor.getPassword() != null && !doctor.getPassword().equals("")){
                 SET("password = #{password}");
+            }
+            if (doctor.getDocProfile() != null && !doctor.getDocProfile().equals("")){
+                SET("doc_profile = #{docProfile}");
             }
             WHERE("job_id = #{jobId} or id = #{id}");
         }}.toString();

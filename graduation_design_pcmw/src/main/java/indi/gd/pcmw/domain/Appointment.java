@@ -7,10 +7,9 @@ import java.util.Date;
 @Data
 public class Appointment {
     private int id;
-    private int userId;
-    private String appointId;
     private String appointType;
-    private int docJobId;
-    private int vaccineId;
+    private int initiatorId;
+    private int handlerId;
+    private Date operateTime;
     private Date appointTime;
 }
