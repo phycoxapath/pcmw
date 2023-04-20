@@ -1,16 +1,17 @@
 package indi.gd.pcmw.service;
 
+import indi.gd.pcmw.domain.Appointment;
 import indi.gd.pcmw.dto.AppointmentDTO;
 import org.apache.ibatis.annotations.Select;
 
 import java.util.List;
 
 public interface AppointmentService {
-    int save();
+    int save(Appointment appointment);
 
-    List<AppointmentDTO> getValidAppointmentByInitiatorId(Integer initiatorId, String role);
+    List<AppointmentDTO> getValidAppointmentByInitiatorId(Integer initiatorId);
 
-    List<AppointmentDTO> getOverdueAppointmentByInitiatorId(Integer initiatorId, String role);
+    List<AppointmentDTO> getOverdueAppointmentByInitiatorId(Integer initiatorId);
 
     List<AppointmentDTO> getValidAppointmentByHandlerId(Integer handlerId, String role);
 
