@@ -5,6 +5,7 @@ import indi.gd.pcmw.dao.DoctorDao;
 import indi.gd.pcmw.dao.HospitalDao;
 import indi.gd.pcmw.dao.UserDao;
 import indi.gd.pcmw.domain.Appointment;
+import indi.gd.pcmw.domain.Doctor;
 import indi.gd.pcmw.dto.AppointmentDTO;
 import indi.gd.pcmw.service.AppointmentService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,6 +29,16 @@ public class AppointmentServiceImpl implements AppointmentService {
         return appointmentDao.save(appointment);
     }
 
+    @Override
+    public int deleteAppointmentById(Integer deleteId) {
+        return appointmentDao.deleteAppointmentById(deleteId);
+    }
+
+    @Override
+    public int getCountByHandlerId(Integer handlerId) {
+        return appointmentDao.getCountByHandlerId(handlerId);
+    }
+
     //只有用户角色发起预约，预约类型为普通挂号和疫苗预约以及绿色通道
     @Override
     public List<AppointmentDTO> getValidAppointmentByInitiatorId(Integer initiatorId) {
@@ -37,8 +48,10 @@ public class AppointmentServiceImpl implements AppointmentService {
                 AppointmentDTO appointment = iterator.next();
 
                 if (appointment.getAppointType().equals("普通预约")) {
+                    Doctor doc = doctorDao.getDoctorById(appointment.getHandlerId());
                     appointment.setInitiatorName(userDao.getUserById(initiatorId).getUserName());
-                    appointment.setHandlerName(doctorDao.getDoctorById(appointment.getHandlerId()).getDocName());
+                    appointment.setHandlerName(doc.getDocName());
+                    appointment.setHandlerDept(doctorDao.getDeptById(doc.getDeptId()));
                 }
                 else if (appointment.getAppointType().equals("疫苗预约") ||appointment.getAppointType().equals("绿色通道")) {
                     appointment.setInitiatorName(userDao.getUserById(initiatorId).getUserName());
@@ -58,8 +71,10 @@ public class AppointmentServiceImpl implements AppointmentService {
             AppointmentDTO appointment = iterator.next();
 
             if (appointment.getAppointType().equals("普通预约")) {
+                Doctor doc = doctorDao.getDoctorById(appointment.getHandlerId());
                 appointment.setInitiatorName(userDao.getUserById(initiatorId).getUserName());
-                appointment.setHandlerName(doctorDao.getDoctorById(appointment.getHandlerId()).getDocName());
+                appointment.setHandlerName(doc.getDocName());
+                appointment.setHandlerDept(doctorDao.getDeptById(doc.getDeptId()));
             }
             else if (appointment.getAppointType().equals("疫苗预约") ||appointment.getAppointType().equals("绿色通道")) {
                 appointment.setInitiatorName(userDao.getUserById(initiatorId).getUserName());

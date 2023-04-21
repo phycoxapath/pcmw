@@ -9,6 +9,10 @@ import java.util.List;
 public interface AppointmentService {
     int save(Appointment appointment);
 
+    int deleteAppointmentById(Integer deleteId);
+
+    int getCountByHandlerId(Integer handlerId);
+
     List<AppointmentDTO> getValidAppointmentByInitiatorId(Integer initiatorId);
 
     List<AppointmentDTO> getOverdueAppointmentByInitiatorId(Integer initiatorId);

@@ -5,6 +5,7 @@ import indi.gd.pcmw.dto.AppointmentDTO;
 import indi.gd.pcmw.service.AppointmentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -29,12 +30,23 @@ public class AppointmentController {
        else
            return "save fail";
     }
-
+    @DeleteMapping("/deleteAppointment")
+    public String delete(@RequestParam("id") Integer deleteId){
+        int flag = appointmentService.deleteAppointmentById(deleteId);
+        if (flag > 0)
+            return "delete success";
+        else
+            return "delete fail";
+    }
+    @GetMapping("/getCountByHandlerId")
+    public int getCountByHandlerId(@RequestParam("id") Integer handlerId){
+        return appointmentService.getCountByHandlerId(handlerId);
+    }
     @GetMapping("/getValidByInitiatorId")
     List<AppointmentDTO> getValidAppointmentByInitiatorId(@RequestParam("initiatorId") Integer initiatorId){
         return appointmentService.getValidAppointmentByInitiatorId(initiatorId);
     }
-    @GetMapping("/geOverdueByInitiatorId")
+    @GetMapping("/getOverdueByInitiatorId")
     List<AppointmentDTO> getOverdueAppointmentByInitiatorId(@RequestParam("initiatorId") Integer initiatorId){
         return appointmentService.getOverdueAppointmentByInitiatorId(initiatorId);
     }
