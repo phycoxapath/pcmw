@@ -26,7 +26,7 @@ public interface HospitalDao {
      * @return
      * 注册时保存医院
      */
-    @Insert("insert into pcmw_hospital values(#{id},#{hospitalName},#{password},#{qualification},#{qualType},#{qualImage})")
+    @Insert("insert into pcmw_hospital values(#{id},#{hospitalName},#{password},#{hospitalDescription},#{qualification},#{qualType},#{qualImage})")
     int save(Hospital hospital);
 
     /**

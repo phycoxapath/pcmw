@@ -13,6 +13,9 @@ public class HospitalDynamicUpdate {
             if (hospital.getPassword() != null && !hospital.getPassword().equals("")){
                 SET("password = #{password}");
             }
+            if (hospital.getHospitalDescription() != null && !hospital.getHospitalDescription().equals("")){
+                SET("hospital_description = #{hospitalDescription}");
+            }
             WHERE("hospital_name = #{hospitalName} or id = #{id}");
         }}.toString();
     }

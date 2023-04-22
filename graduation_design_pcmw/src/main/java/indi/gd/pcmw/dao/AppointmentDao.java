@@ -11,7 +11,7 @@ import java.util.List;
 
 @Mapper
 public interface AppointmentDao {
-    @Insert("insert into pcmw_appointment(initiator_id,handler_id,appoint_type,appoint_appendix,appoint_time) values(#{initiatorId},#{handlerId},#{appointType},#{appointAppendix},#{appointTime})")
+    @Insert("insert into pcmw_appointment(initiator_id,handler_id,appoint_type,appoint_appendix,appoint_time,appoint_state) values(#{initiatorId},#{handlerId},#{appointType},#{appointAppendix},#{appointTime},#{appointState})")
     int save(Appointment appointment);
 
     @Delete("delete from pcmw_appointment where id = #{deleteId}")

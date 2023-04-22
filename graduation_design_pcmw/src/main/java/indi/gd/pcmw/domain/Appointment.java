@@ -15,4 +15,5 @@ public class Appointment {
     private Date operateTime;
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
     private Date appointTime;
+    private String appointState;
 }
