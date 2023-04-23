@@ -59,4 +59,9 @@ public class AppointmentController {
         return appointmentService.getOverdueAppointmentByHandlerId(handlerId, role);
     }
 
+    @GetMapping("/getValidByInitiatorIdAndType")
+    List<AppointmentDTO> getValidByInitiatorIdAndType(@RequestParam("initiatorId") Integer initiatorId,@RequestParam("type") String type){
+        return appointmentService.getValidByInitiatorIdAndType(initiatorId, type);
+    }
+
 }

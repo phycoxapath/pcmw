@@ -5,6 +5,7 @@ import indi.gd.pcmw.dto.AppointmentDTO;
 import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 
 import java.util.List;
@@ -31,5 +32,8 @@ public interface AppointmentDao {
 
     @Select("select * from pcmw_appointment where handler_id = #{handlerId} and appoint_time < NOW()")
     List<AppointmentDTO> getOverdueAppointmentByHandlerId(Integer handlerId);
+
+    @Select("select * from pcmw_appointment where initiator_id = #{initiatorId} and appoint_type = #{type}")
+    List<AppointmentDTO> getValidByInitiatorIdAndType(@Param("initiatorId") Integer initiatorId,@Param("type") String type);
 
 }

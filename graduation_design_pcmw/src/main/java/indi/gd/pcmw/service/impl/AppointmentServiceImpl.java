@@ -132,4 +132,25 @@ public class AppointmentServiceImpl implements AppointmentService {
         }
         return overdueAppointments;
     }
+
+    @Override
+    public List<AppointmentDTO> getValidByInitiatorIdAndType(Integer initiatorId, String type) {
+        List<AppointmentDTO> appointments = appointmentDao.getValidByInitiatorIdAndType(initiatorId, type);
+        if (type.equals("普通预约")){
+            for (AppointmentDTO appointment:appointments
+                 ) {
+                Doctor doc = doctorDao.getDoctorById(appointment.getHandlerId());
+                appointment.setInitiatorName(userDao.getUserById(initiatorId).getUserName());
+                appointment.setHandlerName(doc.getDocName());
+                appointment.setHandlerDept(doctorDao.getDeptById(doc.getDeptId()));
+            }
+        } else if (type.equals("绿色通道") || type.equals("疫苗预约")) {
+            for (AppointmentDTO appointment:appointments
+            ) {
+                appointment.setInitiatorName(userDao.getUserById(initiatorId).getUserName());
+                appointment.setHandlerName(hospitalDao.getHospitalById(appointment.getHandlerId()).getHospitalName());
+            }
+        }
+            return appointments;
+    }
 }
