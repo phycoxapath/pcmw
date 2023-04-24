@@ -39,6 +39,11 @@ public class AppointmentServiceImpl implements AppointmentService {
         return appointmentDao.getCountByHandlerId(handlerId);
     }
 
+    @Override
+    public int updateAppointmentState(Integer id, String state) {
+        return appointmentDao.updateAppointmentState(id, state);
+    }
+
     //只有用户角色发起预约，预约类型为普通挂号和疫苗预约以及绿色通道
     @Override
     public List<AppointmentDTO> getValidAppointmentByInitiatorId(Integer initiatorId) {
@@ -94,7 +99,7 @@ public class AppointmentServiceImpl implements AppointmentService {
         if (role.equals("doctors")) {
             while (iterator.hasNext()) {
                 AppointmentDTO appointment = iterator.next();
-                if (appointment.getAppointType().equals("")){
+                if (appointment.getAppointType().equals("绿色通道")){
                     iterator.remove();
                     continue;
                 }
@@ -105,6 +110,10 @@ public class AppointmentServiceImpl implements AppointmentService {
         else if (role.equals("hospitals")) {
             while (iterator.hasNext()) {
                 AppointmentDTO appointment = iterator.next();
+                if (appointment.getAppointType().equals("普通预约")){
+                    iterator.remove();
+                    continue;
+                }
                 appointment.setInitiatorName(userDao.getUserById(appointment.getInitiatorId()).getUserName());
                 appointment.setHandlerName(hospitalDao.getHospitalById(handlerId).getHospitalName());
             }
@@ -119,6 +128,10 @@ public class AppointmentServiceImpl implements AppointmentService {
         if (role.equals("doctors")) {
             while (iterator.hasNext()) {
                 AppointmentDTO appointment = iterator.next();
+                if (appointment.getAppointType().equals("绿色通道")){
+                    iterator.remove();
+                    continue;
+                }
                 appointment.setInitiatorName(userDao.getUserById(appointment.getInitiatorId()).getUserName());
                 appointment.setHandlerName(doctorDao.getDoctorById(handlerId).getDocName());
             }
@@ -152,5 +165,24 @@ public class AppointmentServiceImpl implements AppointmentService {
             }
         }
             return appointments;
+    }
+
+    @Override
+    public List<AppointmentDTO> getValidByHandlerIdAndType(Integer handlerId, String type) {
+        List<AppointmentDTO> appointments = appointmentDao.getValidByHandlerIdAndType(handlerId, type);
+            if (type.equals("普通预约")){
+                for (AppointmentDTO appointment:appointments
+                ) {
+                    appointment.setInitiatorName(userDao.getUserById(appointment.getInitiatorId()).getUserName());
+                    appointment.setHandlerName(doctorDao.getDoctorById(handlerId).getDocName());
+                }
+            }else {
+                for (AppointmentDTO appointment:appointments
+                ) {
+                    appointment.setInitiatorName(userDao.getUserById(appointment.getInitiatorId()).getUserName());
+                    appointment.setHandlerName(hospitalDao.getHospitalById(handlerId).getHospitalName());
+                }
+            }
+        return appointments;
     }
 }

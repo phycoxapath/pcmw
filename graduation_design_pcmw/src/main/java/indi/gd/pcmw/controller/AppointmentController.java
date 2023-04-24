@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -38,6 +39,15 @@ public class AppointmentController {
         else
             return "delete fail";
     }
+
+    @PutMapping("/updateAppointmentState")
+    public String update(@RequestParam("id") Integer id, @RequestParam("state") String state){
+        int flag = appointmentService.updateAppointmentState(id, state);
+        if (flag > 0)
+            return "update success";
+        else
+            return "update fail";
+    }
     @GetMapping("/getCountByHandlerId")
     public int getCountByHandlerId(@RequestParam("id") Integer handlerId){
         return appointmentService.getCountByHandlerId(handlerId);
@@ -62,6 +72,10 @@ public class AppointmentController {
     @GetMapping("/getValidByInitiatorIdAndType")
     List<AppointmentDTO> getValidByInitiatorIdAndType(@RequestParam("initiatorId") Integer initiatorId,@RequestParam("type") String type){
         return appointmentService.getValidByInitiatorIdAndType(initiatorId, type);
+    }
+    @GetMapping("/getValidByHandlerIdAndType")
+    List<AppointmentDTO> getValidByHandlerIdAndType(@RequestParam("handlerId") Integer handlerId,@RequestParam("type") String type){
+        return appointmentService.getValidByInitiatorIdAndType(handlerId, type);
     }
 
 }

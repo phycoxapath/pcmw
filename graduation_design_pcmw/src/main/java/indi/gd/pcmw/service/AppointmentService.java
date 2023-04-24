@@ -24,4 +24,9 @@ public interface AppointmentService {
 
     List<AppointmentDTO> getValidByInitiatorIdAndType(Integer initiatorId, String type);
 
+    List<AppointmentDTO> getValidByHandlerIdAndType(Integer handlerId, String type);
+
+    int updateAppointmentState(Integer id, String state);
+
+
 }

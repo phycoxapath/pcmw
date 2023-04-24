@@ -7,6 +7,7 @@ import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.Update;
 
 import java.util.List;
 
@@ -20,6 +21,9 @@ public interface AppointmentDao {
 
     @Select("select count(*) from pcmw_appointment where handler_id = #{handlerId} and appoint_type = '普通预约' and appoint_time > NOW()")
     int getCountByHandlerId(Integer handlerId);
+
+    @Update("update pcmw_appointment set appoint_state = #{state} where id = #{id}")
+    int updateAppointmentState(@Param("id") Integer id, @Param("state") String state);
 
     @Select("select * from pcmw_appointment where initiator_id = #{initiatorId} and appoint_time > NOW()")
     List<AppointmentDTO> getValidAppointmentByInitiatorId(Integer initiatorId);
@@ -35,5 +39,9 @@ public interface AppointmentDao {
 
     @Select("select * from pcmw_appointment where initiator_id = #{initiatorId} and appoint_type = #{type}")
     List<AppointmentDTO> getValidByInitiatorIdAndType(@Param("initiatorId") Integer initiatorId,@Param("type") String type);
+    @Select("select * from pcmw_appointment where handler_id = #{handlerId} and appoint_type = #{type}")
+    List<AppointmentDTO> getValidByHandlerIdAndType(@Param("handlerId") Integer handlerId,@Param("type") String type);
+
+
 
 }

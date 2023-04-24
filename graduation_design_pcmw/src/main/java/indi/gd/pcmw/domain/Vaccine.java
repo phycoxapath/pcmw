@@ -9,5 +9,7 @@ public class Vaccine {
     private int id;
     private String vaccineName;
     private BigDecimal vaccinePrice;
+    private String vaccineDescription;
+    private String prepareCompany;
     private int hospId;
 }
