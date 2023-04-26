@@ -16,7 +16,9 @@ public class VaccineDynamicUpdate {
             if (vaccine.getVaccineDescription() != null && !"".equals(vaccine.getVaccineDescription())){
                 SET("vaccine_description = #{vaccineDescription}");
             }
-
+            if (vaccine.getVaccinateDay() != 0){
+                SET("vaccinate_day = #{vaccinateDay}");
+            }
             WHERE("id = #{id}");
         }}.toString();
     }

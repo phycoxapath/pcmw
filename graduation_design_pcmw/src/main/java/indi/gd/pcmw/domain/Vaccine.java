@@ -10,6 +10,7 @@ public class Vaccine {
     private String vaccineName;
     private BigDecimal vaccinePrice;
     private String vaccineDescription;
+    private Byte vaccinateDay;
     private String prepareCompany;
     private int hospId;
 }

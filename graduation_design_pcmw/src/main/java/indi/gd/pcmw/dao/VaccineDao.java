@@ -12,7 +12,7 @@ import java.util.List;
 
 @Mapper
 public interface VaccineDao {
-    @Insert("insert into pcmw_vaccine values(#{id}, #{vaccineName}, #{vaccinePrice}, #{vaccineDescription}, #{prepareCompany}, #{hospId})")
+    @Insert("insert into pcmw_vaccine values(#{id}, #{vaccineName}, #{vaccinePrice}, #{vaccineDescription}, #{vaccinateDay}, #{prepareCompany}, #{hospId})")
     int save(Vaccine vaccine);
 
     @Select("select * from pcmw_vaccine where hosp_id = #{hospId}")
