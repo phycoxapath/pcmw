@@ -1,6 +1,7 @@
 package indi.gd.pcmw.controller;
 
 import indi.gd.pcmw.controller.util.JwtUtil;
+import indi.gd.pcmw.domain.Hospital;
 import indi.gd.pcmw.domain.User;
 import indi.gd.pcmw.service.AdministratorService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,14 +10,16 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.util.List;
 
 @RestController
 @RequestMapping("/admins")
-@CrossOrigin
+@CrossOrigin(exposedHeaders = "Authorization")
 public class AdministratorController {
     @Autowired
     private AdministratorService administratorService;
@@ -25,9 +28,13 @@ public class AdministratorController {
     public String adminLoginValidate(@RequestBody User user, HttpServletResponse response){
         int flag = administratorService.adminLoginValidate(user);
         if (flag == 1){
-            response.setHeader("Access-Control-Expose-Headers", "Authorization");
             response.setHeader("Authorization",JwtUtil.getToken(user));
         }
         return flag == 1 ? "login success" : "login fail";
+    }
+
+    @GetMapping("/getAllHospitals")
+    public List<Hospital> getAllHospitals(){
+        return administratorService.getAllHospitals();
     }
 }

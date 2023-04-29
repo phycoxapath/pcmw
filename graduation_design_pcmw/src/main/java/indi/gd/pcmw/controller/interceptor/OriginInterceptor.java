@@ -9,6 +9,8 @@ public class OriginInterceptor implements HandlerInterceptor {
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
         if (request.getHeader("Origin") == null){
+            System.out.println("in origin");
+            response.setStatus(403);
             response.getWriter().write("invalid access");
             return false;
         }else {

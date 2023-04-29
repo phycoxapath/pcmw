@@ -13,7 +13,7 @@ import java.time.OffsetDateTime;
 import java.util.Date;
 
 public class JwtUtil {
-    private static final String privateKey = "a1804351";
+    private static final String privateKey = "a1804351@!A*i^c02G%$$!89)op";
 
     public static String getToken(User user){
         Instant datetime = LocalDateTime.now().plusDays(1).toInstant(OffsetDateTime.now().getOffset());
