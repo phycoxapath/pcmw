@@ -39,9 +39,8 @@ public class ApplyServiceImpl implements ApplyService {
                     iterator.remove();
                     continue;
                 }
-                applyDTO.setInitiatorName(userDao.getUserById(initiatorId).getLoginName());
-                //admin handle
-
+                applyDTO.setInitiatorName(userDao.getUserById(initiatorId).getUserName());
+                applyDTO.setHandlerName(userDao.getUserById(applyDTO.getHandlerId()).getUserName());
             }
 
         } else if (role.equals("doctors")) {
@@ -51,7 +50,7 @@ public class ApplyServiceImpl implements ApplyService {
                     iterator.remove();
                     continue;
                 }
-                applyDTO.setInitiatorName(doctorDao.getDoctorById(initiatorId).getJobId()+"");
+                applyDTO.setInitiatorName(doctorDao.getDoctorById(initiatorId).getDocName());
                 applyDTO.setHandlerName(hospitalDao.getHospitalById(applyDTO.getHandlerId()).getHospitalName());
             }
 
@@ -63,7 +62,7 @@ public class ApplyServiceImpl implements ApplyService {
                     continue;
                 }
                 applyDTO.setInitiatorName(hospitalDao.getHospitalById(initiatorId).getHospitalName());
-                //admin handle
+                applyDTO.setHandlerName(userDao.getUserById(applyDTO.getHandlerId()).getUserName());
 
             }
 
@@ -77,12 +76,20 @@ public class ApplyServiceImpl implements ApplyService {
         if (role.equals("hospitals")){
             for (ApplyDTO application: applyList
             ) {
-                application.setInitiatorName(doctorDao.getDoctorById(application.getInitiatorId()).getJobId()+"");
+                application.setInitiatorName(doctorDao.getDoctorById(application.getInitiatorId()).getDocName());
                 application.setHandlerName(hospitalDao.getHospitalById(handlerId).getHospitalName());
                 //
             }
         } else {
            //admin
+            for (ApplyDTO application: applyList
+            ) {
+                if (application.getApplyType().equals("免挂号绿色通道预约资质申请"))
+                    application.setInitiatorName(userDao.getUserById(application.getInitiatorId()).getUserName());
+                else
+                    application.setInitiatorName(hospitalDao.getHospitalById(application.getInitiatorId()).getHospitalName());
+                application.setHandlerName(userDao.getUserById(handlerId).getUserName());
+            }
         }
         return applyList;
     }
