@@ -98,4 +98,6 @@ public class ApplyServiceImpl implements ApplyService {
     public int updateApplication(Apply apply) {
         return applyDao.updateApplication(apply);
     }
+
+
 }

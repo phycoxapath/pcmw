@@ -3,6 +3,7 @@ package indi.gd.pcmw.controller;
 import indi.gd.pcmw.controller.util.JwtUtil;
 import indi.gd.pcmw.domain.Hospital;
 import indi.gd.pcmw.domain.User;
+import indi.gd.pcmw.dto.ApplyDTO;
 import indi.gd.pcmw.service.AdministratorService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -11,6 +12,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletResponse;
@@ -35,5 +37,10 @@ public class AdministratorController {
     @GetMapping("/getAllHospitals")
     public List<Hospital> getAllHospitals(){
         return administratorService.getAllHospitals();
+    }
+
+    @GetMapping("/getApplyByType")
+    public List<ApplyDTO> getApplyByType(@RequestParam("id") Integer id, @RequestParam("type") String type){
+        return administratorService.getApplyByType(id, type);
     }
 }
