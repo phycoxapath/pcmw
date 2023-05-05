@@ -11,6 +11,9 @@ spring:
   servlet:
     multipart:
       max-file-size: 2MB
+
+
+
 mybatis:
   configuration:
     map-underscore-to-camel-case: true
