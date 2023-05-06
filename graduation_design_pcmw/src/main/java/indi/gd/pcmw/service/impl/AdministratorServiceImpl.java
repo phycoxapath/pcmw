@@ -45,6 +45,12 @@ public class AdministratorServiceImpl implements AdministratorService {
             application.setInitiatorName(initiatorName);
             application.setHandlerName(userDao.getUserById(id).getUserName());
         }
+        System.out.println(applications);
         return applications;
+    }
+
+    @Override
+    public int updateHospQual(Integer hospId, boolean qualification) {
+        return administratorDao.updateHospQual(hospId, qualification);
     }
 }

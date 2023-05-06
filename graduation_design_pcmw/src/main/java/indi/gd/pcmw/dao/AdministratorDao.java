@@ -5,6 +5,7 @@ import indi.gd.pcmw.dto.ApplyDTO;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.Update;
 
 import java.util.List;
 
@@ -15,4 +16,7 @@ public interface AdministratorDao {
 
     @Select("select * from pcmw_apply where handler_id = #{id} and apply_type = #{type}")
     List<ApplyDTO> getApplyByType(@Param("id") Integer id, @Param("type") String type);
+
+    @Update("update pcmw_hospital set qualification = #{qualification} where id = #{hospId}")
+    int updateHospQual(@Param("hospId") Integer hospId, @Param("qualification") boolean qualification);
 }

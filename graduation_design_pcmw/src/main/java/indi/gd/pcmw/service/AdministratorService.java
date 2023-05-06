@@ -14,4 +14,6 @@ public interface AdministratorService {
 
     List<ApplyDTO> getApplyByType(Integer id, String type);
 
+    int updateHospQual(Integer hospId, boolean qualification);
+
 }

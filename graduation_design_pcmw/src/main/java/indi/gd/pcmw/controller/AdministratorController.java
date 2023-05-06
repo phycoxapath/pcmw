@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -42,5 +43,10 @@ public class AdministratorController {
     @GetMapping("/getApplyByType")
     public List<ApplyDTO> getApplyByType(@RequestParam("id") Integer id, @RequestParam("type") String type){
         return administratorService.getApplyByType(id, type);
+    }
+
+    @PutMapping("/updateHospQual")
+    public String updateHospQual(@RequestParam("hospId") Integer hospId, @RequestParam("qualification") boolean qualification){
+        return administratorService.updateHospQual(hospId, qualification) == 1 ? "update success" : "update fail";
     }
 }
