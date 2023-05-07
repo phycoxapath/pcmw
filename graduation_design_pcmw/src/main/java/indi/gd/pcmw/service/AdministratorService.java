@@ -16,4 +16,6 @@ public interface AdministratorService {
 
     int updateHospQual(Integer hospId, boolean qualification);
 
+    int deleteApplication(Integer id);
+
 }

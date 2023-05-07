@@ -53,4 +53,9 @@ public class AdministratorServiceImpl implements AdministratorService {
     public int updateHospQual(Integer hospId, boolean qualification) {
         return administratorDao.updateHospQual(hospId, qualification);
     }
+
+    @Override
+    public int deleteApplication(Integer id) {
+        return administratorDao.deleteApplication(id);
+    }
 }

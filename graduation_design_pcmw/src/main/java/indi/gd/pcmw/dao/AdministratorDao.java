@@ -2,6 +2,7 @@ package indi.gd.pcmw.dao;
 
 import indi.gd.pcmw.domain.User;
 import indi.gd.pcmw.dto.ApplyDTO;
+import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
@@ -19,4 +20,7 @@ public interface AdministratorDao {
 
     @Update("update pcmw_hospital set qualification = #{qualification} where id = #{hospId}")
     int updateHospQual(@Param("hospId") Integer hospId, @Param("qualification") boolean qualification);
+
+    @Delete("delete from pcmw_apply where id = #{id}")
+    int deleteApplication(Integer id);
 }

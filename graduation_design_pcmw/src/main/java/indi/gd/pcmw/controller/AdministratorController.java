@@ -7,6 +7,7 @@ import indi.gd.pcmw.dto.ApplyDTO;
 import indi.gd.pcmw.service.AdministratorService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -49,4 +50,10 @@ public class AdministratorController {
     public String updateHospQual(@RequestParam("hospId") Integer hospId, @RequestParam("qualification") boolean qualification){
         return administratorService.updateHospQual(hospId, qualification) == 1 ? "update success" : "update fail";
     }
+
+    @DeleteMapping("/deleteApplication")
+    public String deleteApplication(@RequestParam("id") Integer id){
+        return administratorService.deleteApplication(id) == 1 ? "delete success" : "delete fail";
+    }
+
 }
