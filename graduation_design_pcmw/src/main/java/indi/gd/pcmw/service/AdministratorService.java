@@ -15,7 +15,14 @@ public interface AdministratorService {
     List<ApplyDTO> getApplyByType(Integer id, String type);
 
     int updateHospQual(Integer hospId, boolean qualification);
+    int updateUserQual(Integer userId, boolean qualification);
 
     int deleteApplication(Integer id);
+
+    List<User> getAllUsers();
+
+    int deleteUserById(Integer id);
+
+
 
 }

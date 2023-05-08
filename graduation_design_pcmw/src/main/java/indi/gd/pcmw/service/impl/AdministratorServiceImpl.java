@@ -55,7 +55,22 @@ public class AdministratorServiceImpl implements AdministratorService {
     }
 
     @Override
+    public int updateUserQual(Integer userId, boolean qualification) {
+        return administratorDao.updateUserQual(userId, qualification);
+    }
+
+    @Override
     public int deleteApplication(Integer id) {
         return administratorDao.deleteApplication(id);
+    }
+
+    @Override
+    public List<User> getAllUsers() {
+        return administratorDao.getAllUsers();
+    }
+
+    @Override
+    public int deleteUserById(Integer id) {
+        return administratorDao.deleteUserById(id);
     }
 }

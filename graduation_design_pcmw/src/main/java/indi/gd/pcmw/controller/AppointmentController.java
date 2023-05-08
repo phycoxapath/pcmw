@@ -53,12 +53,12 @@ public class AppointmentController {
         return appointmentService.getCountByHandlerId(handlerId);
     }
     @GetMapping("/getValidByInitiatorId")
-    List<AppointmentDTO> getValidAppointmentByInitiatorId(@RequestParam("initiatorId") Integer initiatorId){
-        return appointmentService.getValidAppointmentByInitiatorId(initiatorId);
+    List<AppointmentDTO> getValidAppointmentByInitiatorId(@RequestParam("initiatorId") Integer initiatorId, @RequestParam("type") String type){
+        return appointmentService.getValidAppointmentByInitiatorId(initiatorId, type);
     }
     @GetMapping("/getOverdueByInitiatorId")
-    List<AppointmentDTO> getOverdueAppointmentByInitiatorId(@RequestParam("initiatorId") Integer initiatorId){
-        return appointmentService.getOverdueAppointmentByInitiatorId(initiatorId);
+    List<AppointmentDTO> getOverdueAppointmentByInitiatorId(@RequestParam("initiatorId") Integer initiatorId, @RequestParam("type") String type){
+        return appointmentService.getOverdueAppointmentByInitiatorId(initiatorId, type);
     }
     @GetMapping("/getValidByHandlerId")
     List<AppointmentDTO> getValidAppointmentByHandlerId(@RequestParam("handlerId") Integer handlerId,@RequestParam("role") String role){

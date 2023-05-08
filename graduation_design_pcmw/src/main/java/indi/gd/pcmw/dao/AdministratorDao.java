@@ -20,7 +20,14 @@ public interface AdministratorDao {
 
     @Update("update pcmw_hospital set qualification = #{qualification} where id = #{hospId}")
     int updateHospQual(@Param("hospId") Integer hospId, @Param("qualification") boolean qualification);
-
+    @Update("update pcmw_user set qualification = #{qualification} where id = #{userId}")
+    int updateUserQual(@Param("userId") Integer userId, @Param("qualification") boolean qualification);
     @Delete("delete from pcmw_apply where id = #{id}")
     int deleteApplication(Integer id);
+
+    @Select("select * from pcmw_user where id != 4")
+    List<User> getAllUsers();
+
+    @Delete("delete from pcmw_user where id = #{id}")
+    int deleteUserById(Integer id);
 }

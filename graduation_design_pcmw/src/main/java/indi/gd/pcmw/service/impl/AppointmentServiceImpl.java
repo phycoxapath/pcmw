@@ -46,19 +46,22 @@ public class AppointmentServiceImpl implements AppointmentService {
 
     //只有用户角色发起预约，预约类型为普通挂号和疫苗预约以及绿色通道
     @Override
-    public List<AppointmentDTO> getValidAppointmentByInitiatorId(Integer initiatorId) {
+    public List<AppointmentDTO> getValidAppointmentByInitiatorId(Integer initiatorId, String type) {
         List<AppointmentDTO> validAppointments = appointmentDao.getValidAppointmentByInitiatorId(initiatorId);
         Iterator<AppointmentDTO> iterator = validAppointments.listIterator();
             while (iterator.hasNext()) {
                 AppointmentDTO appointment = iterator.next();
-
-                if (appointment.getAppointType().equals("普通预约")) {
+                if (!type.equals(appointment.getAppointType())){
+                    iterator.remove();
+                    continue;
+                }
+                if (type.equals("普通预约")) {
                     Doctor doc = doctorDao.getDoctorById(appointment.getHandlerId());
                     appointment.setInitiatorName(userDao.getUserById(initiatorId).getUserName());
                     appointment.setHandlerName(doc.getDocName());
                     appointment.setHandlerDept(doctorDao.getDeptById(doc.getDeptId()));
                 }
-                else if (appointment.getAppointType().equals("疫苗预约") ||appointment.getAppointType().equals("绿色通道")) {
+                else {
                     appointment.setInitiatorName(userDao.getUserById(initiatorId).getUserName());
                     appointment.setHandlerName(hospitalDao.getHospitalById(appointment.getHandlerId()).getHospitalName());
                 }
@@ -69,19 +72,22 @@ public class AppointmentServiceImpl implements AppointmentService {
     }
 
     @Override
-    public List<AppointmentDTO> getOverdueAppointmentByInitiatorId(Integer initiatorId) {
+    public List<AppointmentDTO> getOverdueAppointmentByInitiatorId(Integer initiatorId, String type) {
         List<AppointmentDTO> overdueAppointments = appointmentDao.getOverdueAppointmentByInitiatorId(initiatorId);
         Iterator<AppointmentDTO> iterator = overdueAppointments.listIterator();
         while (iterator.hasNext()) {
             AppointmentDTO appointment = iterator.next();
-
-            if (appointment.getAppointType().equals("普通预约")) {
+            if (!type.equals(appointment.getAppointType())){
+                iterator.remove();
+                continue;
+            }
+            if (type.equals("普通预约")) {
                 Doctor doc = doctorDao.getDoctorById(appointment.getHandlerId());
                 appointment.setInitiatorName(userDao.getUserById(initiatorId).getUserName());
                 appointment.setHandlerName(doc.getDocName());
                 appointment.setHandlerDept(doctorDao.getDeptById(doc.getDeptId()));
             }
-            else if (appointment.getAppointType().equals("疫苗预约") ||appointment.getAppointType().equals("绿色通道")) {
+            else {
                 appointment.setInitiatorName(userDao.getUserById(initiatorId).getUserName());
                 appointment.setHandlerName(hospitalDao.getHospitalById(appointment.getHandlerId()).getHospitalName());
             }

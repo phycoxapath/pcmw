@@ -14,9 +14,9 @@ public interface AppointmentService {
 
     int getCountByHandlerId(Integer handlerId);
 
-    List<AppointmentDTO> getValidAppointmentByInitiatorId(Integer initiatorId);
+    List<AppointmentDTO> getValidAppointmentByInitiatorId(Integer initiatorId, String type);
 
-    List<AppointmentDTO> getOverdueAppointmentByInitiatorId(Integer initiatorId);
+    List<AppointmentDTO> getOverdueAppointmentByInitiatorId(Integer initiatorId, String type);
 
     List<AppointmentDTO> getValidAppointmentByHandlerId(Integer handlerId, String role);
 
@@ -27,6 +27,8 @@ public interface AppointmentService {
     List<AppointmentDTO> getValidByHandlerIdAndType(Integer handlerId, String type);
 
     int updateAppointmentState(Integer id, String state);
+
+
 
 
 }

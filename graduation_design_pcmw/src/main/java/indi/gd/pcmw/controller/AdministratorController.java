@@ -50,10 +50,24 @@ public class AdministratorController {
     public String updateHospQual(@RequestParam("hospId") Integer hospId, @RequestParam("qualification") boolean qualification){
         return administratorService.updateHospQual(hospId, qualification) == 1 ? "update success" : "update fail";
     }
+    @PutMapping("/updateUserQual")
+    public String updateUserQual(@RequestParam("userId") Integer userId, @RequestParam("qualification") boolean qualification){
+        return administratorService.updateUserQual(userId, qualification) == 1 ? "update success" : "update fail";
+    }
 
     @DeleteMapping("/deleteApplication")
     public String deleteApplication(@RequestParam("id") Integer id){
         return administratorService.deleteApplication(id) == 1 ? "delete success" : "delete fail";
     }
+
+    @GetMapping("/getAllUsers")
+    List<User> getAllUsers(){
+        return administratorService.getAllUsers();
+    }
+    @DeleteMapping("/deleteUserById")
+    public String deleteUserById(@RequestParam("id") Integer id){
+        return administratorService.deleteUserById(id) == 1 ? "delete success" : "delete fail";
+    }
+
 
 }
