@@ -15,13 +15,13 @@ import java.util.Date;
 public class JwtUtil {
     private static final String privateKey = "a1804351@!A*i^c02G%$$!89)op";
 
-    public static String getToken(User user){
+    public static String getToken(String loginName, String role){
         Instant datetime = LocalDateTime.now().plusDays(1).toInstant(OffsetDateTime.now().getOffset());
         Date expireTime = Date.from(datetime);
         String token;
         token = JWT.create()
-                .withClaim("role","admin")
-                .withClaim("loginName",user.getLoginName())
+                .withClaim("role",role)
+                .withClaim("loginName",loginName)
                 .withIssuedAt(new Date())
                 .withExpiresAt(expireTime)
                 .sign(Algorithm.HMAC256(privateKey));

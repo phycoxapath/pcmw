@@ -4,8 +4,10 @@ import indi.gd.pcmw.dao.provider.DeptBatchInsert;
 import indi.gd.pcmw.dao.provider.HospitalDynamicUpdate;
 import indi.gd.pcmw.domain.Apply;
 import indi.gd.pcmw.domain.Department;
+import indi.gd.pcmw.domain.Doctor;
 import indi.gd.pcmw.domain.Hospital;
 import indi.gd.pcmw.domain.User;
+import indi.gd.pcmw.dto.DoctorDTO;
 import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.InsertProvider;
@@ -26,27 +28,27 @@ public interface HospitalDao {
      * @return
      * 注册时保存医院
      */
-    @Insert("insert into pcmw_hospital values(#{id},#{hospitalName},#{password},#{hospitalDescription},#{qualification},#{qualType},#{qualImage})")
+    @Insert("insert into pcmw_hospital values(#{id},#{loginName},#{hospitalName},#{password},#{hospitalDescription},#{qualification},#{qualType},#{qualImage})")
     int save(Hospital hospital);
 
     /**
      *
-     * @param hospitalName
+     * @param loginName
      * @param password
      * @return
      * 登录验证
      */
-    @Select("select count(*) from pcmw_hospital where hospital_name = #{hospitalName} and password = #{password}")
-    int loginValidate(@Param("hospitalName") String hospitalName, @Param("password") String password);
+    @Select("select count(*) from pcmw_hospital where login_name = #{loginName} and password = #{password}")
+    int loginValidate(@Param("loginName") String loginName, @Param("password") String password);
 
     /**
      *
-     * @param hospitalName
+     * @param loginName
      * @return
-     * 通过医院名查找医院信息
+     * 通过登录名查找医院信息
      */
-    @Select("select * from pcmw_hospital where hospital_name = #{hospitalName}")
-    Hospital getHospitalByHospitalName(String hospitalName);
+    @Select("select * from pcmw_hospital where login_name = #{loginName}")
+    Hospital getHospitalByLoginName(String loginName);
     @Select("select * from pcmw_hospital where id = #{id}")
     Hospital getHospitalById(Integer id);
     /**
@@ -68,16 +70,25 @@ public interface HospitalDao {
     int insertDeptBatch(List<Department> departments);
     @Delete("delete from pcmw_department where hosp_id = #{hospId} and dept_name = #{deptName}")
     int deleteDept(@Param("deptName") String deptName, @Param("hospId") String hospId);
+
     @Select("select * from pcmw_department where hosp_id = #{hospId}")
     List<Department> getDeptByHospId(Integer hospId);
 
     @Update("update pcmw_hospital set qual_image = #{imageName} where id = #{id}")
     int updateHospitalQual(@Param("imageName") String imageName,@Param("id") Integer id);
+
     @Select("select * from pcmw_hospital")
     List<Hospital> getAllHospitals();
 
     @Select("select * from pcmw_apply")
     List<Apply> getApplications();
+
     @Update("update pcmw_doctor set qualification = #{qualification} where id = #{id}")
     int updateDoctorQualification(@Param("id") Integer id ,@Param("qualification") boolean qualification);
+
+    @Select("select * from pcmw_doctor where dept_id = #{deptId}")
+    List<DoctorDTO> getDoctorsByDeptId(Integer deptId);
+
+    @Delete("delete from pcmw_doctor where id = #{docId}")
+    int deleteDoctorById(Integer docId);
 }

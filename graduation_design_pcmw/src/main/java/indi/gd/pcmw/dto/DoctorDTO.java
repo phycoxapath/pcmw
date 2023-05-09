@@ -10,6 +10,7 @@ public class DoctorDTO {
     private String password;
     private String docName;
     private char gender;
+    private String docTitle;
     private byte workingDay;
     private String deptName;
     private String docProfile;

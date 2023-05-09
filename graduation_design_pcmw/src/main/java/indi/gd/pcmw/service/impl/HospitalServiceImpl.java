@@ -5,6 +5,7 @@ import indi.gd.pcmw.domain.Apply;
 import indi.gd.pcmw.domain.Department;
 import indi.gd.pcmw.domain.Hospital;
 import indi.gd.pcmw.domain.User;
+import indi.gd.pcmw.dto.DoctorDTO;
 import indi.gd.pcmw.service.HospitalService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -67,8 +68,8 @@ public class HospitalServiceImpl implements HospitalService {
     }
 
     @Override
-    public Hospital getHospitalHospitalName(String hospitalName) {
-        return hospitalDao.getHospitalByHospitalName(hospitalName);
+    public Hospital getHospitalByLoginName(String loginName) {
+        return hospitalDao.getHospitalByLoginName(loginName);
     }
 
 
@@ -77,7 +78,17 @@ public class HospitalServiceImpl implements HospitalService {
         return hospitalDao.save(hospital);
     }
 
-    public int loginValidate(String hospitalName, String password){
-        return hospitalDao.loginValidate(hospitalName, password);
+    public int loginValidate(String loginName, String password){
+        return hospitalDao.loginValidate(loginName, password);
+    }
+
+    @Override
+    public List<DoctorDTO> getDoctorsByDeptId(Integer deptId) {
+        return hospitalDao.getDoctorsByDeptId(deptId);
+    }
+
+    @Override
+    public int deleteDoctorById(Integer docId) {
+        return hospitalDao.deleteDoctorById(docId);
     }
 }

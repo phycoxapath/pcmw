@@ -25,6 +25,9 @@ public class DoctorDynamicUpdate {
             if (doctor.getDocProfile() != null && !doctor.getDocProfile().equals("")){
                 SET("doc_profile = #{docProfile}");
             }
+            if (doctor.getDocTitle() != null && !doctor.getDocTitle().equals("")){
+                SET("doc_title = #{docTitle}");
+            }
             WHERE("job_id = #{jobId} or id = #{id}");
         }}.toString();
     }

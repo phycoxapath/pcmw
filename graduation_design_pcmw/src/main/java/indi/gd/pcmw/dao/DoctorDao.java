@@ -17,7 +17,7 @@ import java.util.List;
 
 @Mapper
 public interface DoctorDao {
-    @Insert("insert into pcmw_doctor values(#{id},#{jobId},#{password},#{docName},#{gender},#{workingDay},#{deptId},#{docProfile},#{qualification},#{qualType},#{qualImage})")
+    @Insert("insert into pcmw_doctor values(#{id},#{jobId},#{password},#{docName},#{gender},#{docTitle},#{workingDay},#{deptId},#{docProfile},#{qualification},#{qualType},#{qualImage})")
     int save(Doctor doctor);
 
     @Select("select count(*) from pcmw_doctor where job_id = #{jobId} and password = #{password}")

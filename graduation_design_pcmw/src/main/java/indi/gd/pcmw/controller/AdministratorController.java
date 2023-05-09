@@ -31,7 +31,7 @@ public class AdministratorController {
     public String adminLoginValidate(@RequestBody User user, HttpServletResponse response){
         int flag = administratorService.adminLoginValidate(user);
         if (flag == 1){
-            response.setHeader("Authorization",JwtUtil.getToken(user));
+            response.setHeader("Authorization",JwtUtil.getToken(user.getLoginName(), "admin"));
         }
         return flag == 1 ? "login success" : "login fail";
     }

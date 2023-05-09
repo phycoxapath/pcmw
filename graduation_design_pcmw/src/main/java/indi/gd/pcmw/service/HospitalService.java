@@ -3,6 +3,7 @@ package indi.gd.pcmw.service;
 import indi.gd.pcmw.domain.Apply;
 import indi.gd.pcmw.domain.Department;
 import indi.gd.pcmw.domain.Hospital;
+import indi.gd.pcmw.dto.DoctorDTO;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
@@ -10,9 +11,9 @@ import java.util.List;
 public interface HospitalService {
     int save(Hospital hospital);
 
-    int loginValidate(String hospitalName, String password);
+    int loginValidate(String loginName, String password);
 
-    Hospital getHospitalHospitalName(String hospitalName);
+    Hospital getHospitalByLoginName(String loginName);
 
     Hospital getHospitalById(Integer id);
 
@@ -31,5 +32,10 @@ public interface HospitalService {
     List<Apply> getApplications();
 
     int updateDoctorQualification(Integer id, boolean qualification);
+
+    List<DoctorDTO> getDoctorsByDeptId(Integer deptId);
+
+    int deleteDoctorById(Integer docId);
+
 
 }

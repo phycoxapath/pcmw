@@ -10,6 +10,7 @@ public class Doctor {
     private String password;
     private String docName;
     private String gender;
+    private String docTitle;
     private byte workingDay;
     private int deptId;
     private String docProfile;

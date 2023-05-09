@@ -3,6 +3,7 @@ package indi.gd.pcmw.controller;
 import indi.gd.pcmw.domain.Apply;
 import indi.gd.pcmw.domain.Department;
 import indi.gd.pcmw.domain.Hospital;
+import indi.gd.pcmw.dto.DoctorDTO;
 import indi.gd.pcmw.service.HospitalService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -37,13 +38,13 @@ public class HospitalController {
     }
 
     @GetMapping("/getByName")
-    public Hospital getHospitalByHospitalName(@RequestParam("name") String hospitalName){
-        return hospitalService.getHospitalHospitalName(hospitalName);
+    public Hospital getHospitalByHospitalName(@RequestParam("name") String loginName){
+        return hospitalService.getHospitalByLoginName(loginName);
     }
     @GetMapping("/login")
-    public String login(@RequestParam("name") String hospitalName, @RequestParam("password") String password){
+    public String login(@RequestParam("name") String loginName, @RequestParam("password") String password){
 
-        int flag = hospitalService.loginValidate(hospitalName,password);
+        int flag = hospitalService.loginValidate(loginName,password);
         if (flag == 1) {
             return "login success";
         }
@@ -121,5 +122,14 @@ public class HospitalController {
             return "update fail";
 
     }
+    @GetMapping("/getDoctorsByDeptId")
+    public List<DoctorDTO> getDoctorsByDeptId(@RequestParam("deptId") Integer deptId){
+        return hospitalService.getDoctorsByDeptId(deptId);
+    }
+    @DeleteMapping("/deleteDoctorById")
+    public String deleteDoctor(@RequestParam("docId") Integer docId){
+        return hospitalService.deleteDoctorById(docId) == 1 ? "delete success" : "delete fail";
+    }
+
 
 }
