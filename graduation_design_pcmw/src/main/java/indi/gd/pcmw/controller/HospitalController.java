@@ -2,6 +2,7 @@ package indi.gd.pcmw.controller;
 
 import indi.gd.pcmw.domain.Apply;
 import indi.gd.pcmw.domain.Department;
+import indi.gd.pcmw.domain.HospNotice;
 import indi.gd.pcmw.domain.Hospital;
 import indi.gd.pcmw.dto.DoctorDTO;
 import indi.gd.pcmw.service.HospitalService;
@@ -129,6 +130,10 @@ public class HospitalController {
     @DeleteMapping("/deleteDoctorById")
     public String deleteDoctor(@RequestParam("docId") Integer docId){
         return hospitalService.deleteDoctorById(docId) == 1 ? "delete success" : "delete fail";
+    }
+    @PostMapping("/insertNotice")
+    public String insertNotice(@RequestBody HospNotice hospNotice){
+        return hospitalService.insertNotice(hospNotice) == 1 ? "insert success" : "insert fail";
     }
 
 

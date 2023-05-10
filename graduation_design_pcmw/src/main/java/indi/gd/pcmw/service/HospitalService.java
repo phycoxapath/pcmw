@@ -2,6 +2,7 @@ package indi.gd.pcmw.service;
 
 import indi.gd.pcmw.domain.Apply;
 import indi.gd.pcmw.domain.Department;
+import indi.gd.pcmw.domain.HospNotice;
 import indi.gd.pcmw.domain.Hospital;
 import indi.gd.pcmw.dto.DoctorDTO;
 import org.springframework.transaction.annotation.Transactional;
@@ -36,6 +37,9 @@ public interface HospitalService {
     List<DoctorDTO> getDoctorsByDeptId(Integer deptId);
 
     int deleteDoctorById(Integer docId);
+
+    int insertNotice(HospNotice hospNotice);
+
 
 
 }

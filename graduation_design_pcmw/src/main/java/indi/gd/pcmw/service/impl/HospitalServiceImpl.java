@@ -3,6 +3,7 @@ package indi.gd.pcmw.service.impl;
 import indi.gd.pcmw.dao.HospitalDao;
 import indi.gd.pcmw.domain.Apply;
 import indi.gd.pcmw.domain.Department;
+import indi.gd.pcmw.domain.HospNotice;
 import indi.gd.pcmw.domain.Hospital;
 import indi.gd.pcmw.domain.User;
 import indi.gd.pcmw.dto.DoctorDTO;
@@ -90,5 +91,10 @@ public class HospitalServiceImpl implements HospitalService {
     @Override
     public int deleteDoctorById(Integer docId) {
         return hospitalDao.deleteDoctorById(docId);
+    }
+
+    @Override
+    public int insertNotice(HospNotice hospNotice) {
+        return hospitalDao.insertNotice(hospNotice);
     }
 }

@@ -5,6 +5,7 @@ import indi.gd.pcmw.dao.provider.HospitalDynamicUpdate;
 import indi.gd.pcmw.domain.Apply;
 import indi.gd.pcmw.domain.Department;
 import indi.gd.pcmw.domain.Doctor;
+import indi.gd.pcmw.domain.HospNotice;
 import indi.gd.pcmw.domain.Hospital;
 import indi.gd.pcmw.domain.User;
 import indi.gd.pcmw.dto.DoctorDTO;
@@ -18,6 +19,7 @@ import org.apache.ibatis.annotations.Update;
 import org.apache.ibatis.annotations.UpdateProvider;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.util.Date;
 import java.util.List;
 
 @Mapper
@@ -91,4 +93,8 @@ public interface HospitalDao {
 
     @Delete("delete from pcmw_doctor where id = #{docId}")
     int deleteDoctorById(Integer docId);
+
+    @Insert("insert into pcmw_hosp_notice(notice_title, notice_main, notice_publisher, hosp_id) values(#{noticeTitle},#{noticeMain},#{noticePublisher},#{hospId})")
+    int insertNotice(HospNotice hospNotice);
+
 }
