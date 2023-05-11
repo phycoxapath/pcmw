@@ -97,4 +97,7 @@ public interface HospitalDao {
     @Insert("insert into pcmw_hosp_notice(notice_title, notice_main, notice_publisher, hosp_id) values(#{noticeTitle},#{noticeMain},#{noticePublisher},#{hospId})")
     int insertNotice(HospNotice hospNotice);
 
+    @Select("select id, notice_title, notice_publisher, hosp_id, post_time from pcmw_hosp_notice where hosp_id = #{hospId}")
+    List<HospNotice> getNoticeListByHospId(Integer hospId);
+
 }

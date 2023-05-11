@@ -136,5 +136,10 @@ public class HospitalController {
         return hospitalService.insertNotice(hospNotice) == 1 ? "insert success" : "insert fail";
     }
 
+    @GetMapping("/getNoticeListByHospId")
+    public List<HospNotice> getNoticeListByHospId(Integer hospId){
+        return hospitalService.getNoticeListByHospId(hospId);
+    }
+
 
 }

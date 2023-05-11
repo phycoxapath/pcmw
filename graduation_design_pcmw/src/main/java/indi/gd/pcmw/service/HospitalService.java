@@ -40,6 +40,8 @@ public interface HospitalService {
 
     int insertNotice(HospNotice hospNotice);
 
+    List<HospNotice> getNoticeListByHospId(Integer hospId);
+
 
 
 }
