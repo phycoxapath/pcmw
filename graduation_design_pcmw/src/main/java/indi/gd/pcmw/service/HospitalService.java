@@ -42,6 +42,11 @@ public interface HospitalService {
 
     List<HospNotice> getNoticeListByHospId(Integer hospId);
 
+    HospNotice getSpecificNoticeById(Integer id);
+
+    int updateNotice(HospNotice hospNotice);
+
+    int deleteNoticeById(Integer noticeId);
 
 
 }

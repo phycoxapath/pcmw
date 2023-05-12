@@ -102,4 +102,19 @@ public class HospitalServiceImpl implements HospitalService {
     public List<HospNotice> getNoticeListByHospId(Integer hospId) {
         return hospitalDao.getNoticeListByHospId(hospId);
     }
+
+    @Override
+    public HospNotice getSpecificNoticeById(Integer id) {
+        return hospitalDao.getSpecificNoticeById(id);
+    }
+
+    @Override
+    public int updateNotice(HospNotice hospNotice) {
+        return hospitalDao.updateNotice(hospNotice);
+    }
+
+    @Override
+    public int deleteNoticeById(Integer noticeId) {
+        return hospitalDao.deleteNoticeById(noticeId);
+    }
 }

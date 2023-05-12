@@ -6,6 +6,7 @@ import indi.gd.pcmw.domain.HospNotice;
 import indi.gd.pcmw.domain.Hospital;
 import indi.gd.pcmw.dto.DoctorDTO;
 import indi.gd.pcmw.service.HospitalService;
+import org.apache.ibatis.annotations.Delete;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -137,8 +138,23 @@ public class HospitalController {
     }
 
     @GetMapping("/getNoticeListByHospId")
-    public List<HospNotice> getNoticeListByHospId(Integer hospId){
+    public List<HospNotice> getNoticeListByHospId(@RequestParam("hospId") Integer hospId){
         return hospitalService.getNoticeListByHospId(hospId);
+    }
+
+    @GetMapping("/getSpecificNoticeById")
+    public HospNotice getSpecificNoticeById(@RequestParam("id") Integer id){
+        return hospitalService.getSpecificNoticeById(id);
+    }
+
+    @PutMapping("/updateNotice")
+    public String updateNotice(@RequestBody HospNotice hospNotice){
+        return hospitalService.updateNotice(hospNotice) == 1 ? "update success" : "update fail";
+    }
+
+    @DeleteMapping("/deleteNoticeById")
+    public String deleteNoticeById(@RequestParam Integer noticeId){
+        return hospitalService.deleteNoticeById(noticeId) == 1 ? "delete success" : "delete fail";
     }
 
 

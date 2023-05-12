@@ -1,6 +1,7 @@
 package indi.gd.pcmw.dao;
 
 import indi.gd.pcmw.dao.provider.DeptBatchInsert;
+import indi.gd.pcmw.dao.provider.HospNoticeDynamicUpdate;
 import indi.gd.pcmw.dao.provider.HospitalDynamicUpdate;
 import indi.gd.pcmw.domain.Apply;
 import indi.gd.pcmw.domain.Department;
@@ -100,4 +101,12 @@ public interface HospitalDao {
     @Select("select id, notice_title, notice_publisher, hosp_id, post_time from pcmw_hosp_notice where hosp_id = #{hospId}")
     List<HospNotice> getNoticeListByHospId(Integer hospId);
 
+    @Select("select * from pcmw_hosp_notice where id = #{id}")
+    HospNotice getSpecificNoticeById(Integer id);
+
+    @UpdateProvider(type = HospNoticeDynamicUpdate.class, method = "updateHospNotice")
+    int updateNotice(HospNotice hospNotice);
+
+    @Delete("delete from pcmw_hosp_notice where id = #{noticeId}")
+    int deleteNoticeById(Integer noticeId);
 }
