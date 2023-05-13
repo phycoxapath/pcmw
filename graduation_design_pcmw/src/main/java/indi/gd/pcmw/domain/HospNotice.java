@@ -3,9 +3,10 @@ package indi.gd.pcmw.domain;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
 
+import java.io.Serializable;
 import java.util.Date;
 @Data
-public class HospNotice {
+public class HospNotice implements Serializable {
     private Integer id;
     private String noticeTitle;
     private String noticeMain;

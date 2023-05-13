@@ -9,6 +9,7 @@ import indi.gd.pcmw.service.HospitalService;
 import org.apache.ibatis.annotations.Delete;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -33,6 +34,8 @@ public class HospitalController {
     HospitalService hospitalService;
     @Value("${HospitalQualPath}")
     private String path;
+    @Autowired
+    private RedisTemplate<Object, Object> redisTemplate;
     @PostMapping
     public String save(@RequestBody Hospital hospital){
         hospitalService.save(hospital);
@@ -134,6 +137,7 @@ public class HospitalController {
     }
     @PostMapping("/insertNotice")
     public String insertNotice(@RequestBody HospNotice hospNotice){
+        redisTemplate.delete("recentNotice");
         return hospitalService.insertNotice(hospNotice) == 1 ? "insert success" : "insert fail";
     }
 
@@ -149,11 +153,13 @@ public class HospitalController {
 
     @PutMapping("/updateNotice")
     public String updateNotice(@RequestBody HospNotice hospNotice){
+        redisTemplate.delete("recentNotice");
         return hospitalService.updateNotice(hospNotice) == 1 ? "update success" : "update fail";
     }
 
     @DeleteMapping("/deleteNoticeById")
     public String deleteNoticeById(@RequestParam Integer noticeId){
+        redisTemplate.delete("recentNotice");
         return hospitalService.deleteNoticeById(noticeId) == 1 ? "delete success" : "delete fail";
     }
 

@@ -1,6 +1,11 @@
 package indi.gd.pcmw.controller;
 
+import indi.gd.pcmw.dao.HospNoticeDao;
+import indi.gd.pcmw.domain.HospNotice;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.data.redis.core.RedisTemplate;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -11,9 +16,12 @@ import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
+import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 @RestController
 @RequestMapping("/common")
+@CrossOrigin
 public class CommonController {
     @Value("${UserQualPath}")
     private String usersQualPath;
@@ -24,6 +32,11 @@ public class CommonController {
     @Value("${HospitalQualPath}")
     private String hospitalsQualPath;
 
+    @Autowired
+    private HospNoticeDao hospNoticeDao;
+
+    @Autowired
+    private RedisTemplate<Object, Object> redisTemplate;
     @GetMapping("/downloadImg")
     public void downloadImg(@RequestParam("fileName") String fileName,HttpServletResponse response){
         File f = new File(fileName);
@@ -40,5 +53,15 @@ public class CommonController {
       }catch (Exception e){
           e.printStackTrace();
       }
+    }
+    @GetMapping("/getRecentHospNotice")
+    public List<HospNotice> getRecentHospNotice(){
+        String key = "recentNotice";
+        List<HospNotice> hospNotices = (List<HospNotice>) redisTemplate.opsForValue().get(key);
+        if (hospNotices != null){
+            return hospNotices;
+        }
+        redisTemplate.opsForValue().set(key,hospNoticeDao.getRecentHospNotice(),60, TimeUnit.MINUTES);
+        return hospNoticeDao.getRecentHospNotice();
     }
 }
