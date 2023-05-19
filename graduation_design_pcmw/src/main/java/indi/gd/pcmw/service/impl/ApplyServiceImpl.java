@@ -73,12 +73,16 @@ public class ApplyServiceImpl implements ApplyService {
     @Override
     public List<ApplyDTO> getApplicationByHandlerId(Integer handlerId, String role) {
         List<ApplyDTO> applyList = applyDao.getApplicationByHandlerId(handlerId);
+        Iterator<ApplyDTO> iterator = applyList.listIterator();
         if (role.equals("hospitals")){
-            for (ApplyDTO application: applyList
-            ) {
+            while (iterator.hasNext()){
+                ApplyDTO application = iterator.next();
+                if (!application.getApplyType().equals("从业资格认证申请")){
+                    iterator.remove();
+                    continue;
+                }
                 application.setInitiatorName(doctorDao.getDoctorById(application.getInitiatorId()).getDocName());
                 application.setHandlerName(hospitalDao.getHospitalById(handlerId).getHospitalName());
-                //
             }
         } else {
            //admin

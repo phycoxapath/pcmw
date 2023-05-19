@@ -75,7 +75,7 @@ public class AppointmentController {
     }
     @GetMapping("/getValidByHandlerIdAndType")
     List<AppointmentDTO> getValidByHandlerIdAndType(@RequestParam("handlerId") Integer handlerId,@RequestParam("type") String type){
-        return appointmentService.getValidByInitiatorIdAndType(handlerId, type);
+        return appointmentService.getValidByHandlerIdAndType(handlerId, type);
     }
 
 }
