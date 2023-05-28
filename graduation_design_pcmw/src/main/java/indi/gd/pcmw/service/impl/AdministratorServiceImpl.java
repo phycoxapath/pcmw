@@ -4,6 +4,7 @@ import indi.gd.pcmw.controller.util.JwtUtil;
 import indi.gd.pcmw.dao.AdministratorDao;
 import indi.gd.pcmw.dao.HospitalDao;
 import indi.gd.pcmw.dao.UserDao;
+import indi.gd.pcmw.domain.Commodity;
 import indi.gd.pcmw.domain.Hospital;
 import indi.gd.pcmw.domain.User;
 import indi.gd.pcmw.dto.ApplyDTO;
@@ -72,5 +73,10 @@ public class AdministratorServiceImpl implements AdministratorService {
     @Override
     public int deleteUserById(Integer id) {
         return administratorDao.deleteUserById(id);
+    }
+
+    @Override
+    public int saveCommodity(Commodity commodity) {
+        return administratorDao.saveCommodity(commodity);
     }
 }

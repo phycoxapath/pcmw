@@ -8,6 +8,9 @@ import java.math.BigDecimal;
 public class Commodity {
     private int id;
     private String commodityName;
+    private String commodityCategory;
     private String commodityDescription;
     private BigDecimal commodityPrice;
+    private int commodityStock;
+    private String commodityImage;
 }

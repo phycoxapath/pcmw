@@ -1,8 +1,10 @@
 package indi.gd.pcmw.dao;
 
+import indi.gd.pcmw.domain.Commodity;
 import indi.gd.pcmw.domain.User;
 import indi.gd.pcmw.dto.ApplyDTO;
 import org.apache.ibatis.annotations.Delete;
+import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
@@ -30,4 +32,7 @@ public interface AdministratorDao {
 
     @Delete("delete from pcmw_user where id = #{id}")
     int deleteUserById(Integer id);
+
+    @Insert("insert into pcmw_commodity values(#{id},#{commodityName},#{commodityCategory},#{commodityDescription},#{commodityPrice},#{commodityStock},#{commodityImage})")
+    int saveCommodity(Commodity commodity);
 }

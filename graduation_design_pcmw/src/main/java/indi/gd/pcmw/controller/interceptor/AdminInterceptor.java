@@ -12,6 +12,9 @@ public class AdminInterceptor implements HandlerInterceptor {
         if (request.getMethod().equals("OPTIONS")){
             return true;
         }
+        if (request.getHeader("Content-Type") != null){
+            return true;
+        }
         String token = request.getHeader("Authorization");
         if (null != token && !"".equals(token)) {
             int flag = JwtUtil.verifyToken(token);

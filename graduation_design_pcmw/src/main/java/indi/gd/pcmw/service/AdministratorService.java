@@ -1,5 +1,6 @@
 package indi.gd.pcmw.service;
 
+import indi.gd.pcmw.domain.Commodity;
 import indi.gd.pcmw.domain.Hospital;
 import indi.gd.pcmw.domain.User;
 import indi.gd.pcmw.dto.ApplyDTO;
@@ -23,6 +24,7 @@ public interface AdministratorService {
 
     int deleteUserById(Integer id);
 
+    int saveCommodity(Commodity commodity);
 
 
 }

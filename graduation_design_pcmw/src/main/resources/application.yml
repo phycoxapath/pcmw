@@ -22,3 +22,4 @@ mybatis:
 UserQualPath: "D://UserQual//"
 DoctorQualPath: "D://DoctorQual//"
 HospitalQualPath: "D://HospitalQual//"
+commodityImgTempPath: "D://TempImg//"
