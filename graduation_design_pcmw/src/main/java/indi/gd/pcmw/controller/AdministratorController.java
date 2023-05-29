@@ -107,4 +107,9 @@ public class AdministratorController {
     public String saveCommodity(@RequestBody Commodity commodity){
         return administratorService.saveCommodity(commodity) == 1 ? "save success" : "save fail";
     }
+
+    @GetMapping("/getAllCommodity")
+    public List<Commodity> getAllCommodity(){
+        return administratorService.getAllCommodity();
+    }
 }

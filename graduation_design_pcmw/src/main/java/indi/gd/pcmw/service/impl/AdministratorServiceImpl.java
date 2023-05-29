@@ -79,4 +79,9 @@ public class AdministratorServiceImpl implements AdministratorService {
     public int saveCommodity(Commodity commodity) {
         return administratorDao.saveCommodity(commodity);
     }
+
+    @Override
+    public List<Commodity> getAllCommodity() {
+        return administratorDao.getAllCommodity();
+    }
 }

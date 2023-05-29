@@ -26,5 +26,7 @@ public interface AdministratorService {
 
     int saveCommodity(Commodity commodity);
 
+    List<Commodity> getAllCommodity();
+
 
 }

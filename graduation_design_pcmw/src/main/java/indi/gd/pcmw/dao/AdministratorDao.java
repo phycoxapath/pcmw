@@ -35,4 +35,7 @@ public interface AdministratorDao {
 
     @Insert("insert into pcmw_commodity values(#{id},#{commodityName},#{commodityCategory},#{commodityDescription},#{commodityPrice},#{commodityStock},#{commodityImage})")
     int saveCommodity(Commodity commodity);
+
+    @Select("select * from pcmw_commodity")
+    List<Commodity> getAllCommodity();
 }
